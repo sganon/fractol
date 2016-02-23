@@ -6,23 +6,28 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 16:36:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/23 17:55:44 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_mandel_var(t_env *e)
+void	draw_color(t_env *e, int i, int x, int y)
 {
-	e->min_x = -2;
-	e->max_x = 2;
-	e->min_y = -2;
-	e->max_y = 2;
-	e->img_x = WIN_X;
-	e->img_y = WIN_Y;
-	e->i_max = 50;
-	e->zoom_x = e->img_x / (e->max_x - e->min_x);
-	e->zoom_y = e->img_y / (e->max_y - e->min_y);
+	t_color	u;
+	int		p;
+
+	if (i == e->i_max)
+		u.color = 0;
+	else
+		u.color = i * 100;
+	p = x * 4 + y * e->sl;
+	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
+	{
+		e->img[p] = u.rgb.b;
+		e->img[p + 1] = u.rgb.g;
+		e->img[p + 2] = u.rgb.r;
+	}
 }
 
 void	mandel(t_env *e)
@@ -32,7 +37,6 @@ void	mandel(t_env *e)
 	int		i;
 	double tmp;
 
-	init_mandel_var(e);
 	x = 0;
 	while (x < e->img_x)
 	{
@@ -51,11 +55,7 @@ void	mandel(t_env *e)
 				e->z_i = 2 * e->z_i * tmp + e->c_i;
 				i++;
 			}
-			if (e->i_max == i)
-				mlx_pixel_put(e->mlx, e->win, x, y, 0xFFFFFF);
-			else
-				mlx_pixel_put(e->mlx, e->win, x, y, i * 200);
-				
+			draw_color(e, i, x, y);
 			y++;
 		}
 		x++;
