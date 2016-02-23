@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 14:18:03 by sganon           ###   ########.fr       */
+/*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
+/*   Updated: 2016/02/23 14:10:15 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int argc, char **argv)
+int		init_env(t_env *e)
 {
-	t_env	*e;
-	(void)argc;
-	(void)argv;
-
-	e = (t_env *)malloc(sizeof(t_env));
-	if (!(init_env(e)))
+	if (!(e->mlx = mlx_init()))
 		return (0);
-	mlx_key_hook(e->win, key_events, e);
-	mlx_loop(e);
-	return (0);
+	if (!(e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Fract'ol")))
+		return (0);
+	return (1);
 }

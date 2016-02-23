@@ -6,13 +6,15 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/02/23 12:46:25 by sganon           ###   ########.fr        #
+#    Updated: 2016/02/23 14:17:16 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	fractol
 
-SRC =	main.c
+SRC =	main.c \
+		init.c \
+		key_hook.c \
 
 SRC_LIST =	$(addprefix srcs/, $(SRC))
 

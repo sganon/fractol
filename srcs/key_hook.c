@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 14:18:03 by sganon           ###   ########.fr       */
+/*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
+/*   Updated: 2016/02/23 14:17:25 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		main(int argc, char **argv)
+int		key_events(int keycode, t_env *e)
 {
-	t_env	*e;
-	(void)argc;
-	(void)argv;
-
-	e = (t_env *)malloc(sizeof(t_env));
-	if (!(init_env(e)))
-		return (0);
-	mlx_key_hook(e->win, key_events, e);
-	mlx_loop(e);
+	(void)e;
+	if (keycode == ESC)
+		exit(0);
 	return (0);
 }
