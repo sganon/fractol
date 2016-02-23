@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 14:19:00 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/23 15:54:57 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,23 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	double			min_x;
+	double			max_x;
+	double			min_y;
+	double			max_y;
+	double			c_r;
+	double			c_i;
+	double			z_r;
+	double			z_i;
+	double			r;
+	int				i_max;
+	double			img_x;
+	double			img_y;
+	double			zoom_x;
+	double			zoom_y;
 }					t_env;
 
 int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
+void	mandel(t_env *e);
 #endif
