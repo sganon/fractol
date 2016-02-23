@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 15:58:56 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/23 16:36:50 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	init_mandel_var(t_env *e)
 {
-	e->min_x = -2.6;
-	e->max_x = 0.6;
-	e->min_y = -1.2;
-	e->max_y = 1.2;
-	e->img_x = 270;
-	e->img_y = 240;
+	e->min_x = -2;
+	e->max_x = 2;
+	e->min_y = -2;
+	e->max_y = 2;
+	e->img_x = WIN_X;
+	e->img_y = WIN_Y;
 	e->i_max = 50;
 	e->zoom_x = e->img_x / (e->max_x - e->min_x);
 	e->zoom_y = e->img_y / (e->max_y - e->min_y);
