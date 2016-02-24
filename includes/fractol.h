@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 18:23:23 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/24 16:23:25 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define WHEEL_UP		4
 # define WHEEL_DOWN		5
 
-# define WIN_X		1920
-# define WIN_Y		1080
+# define WIN_X		900
+# define WIN_Y		900
 
 typedef unsigned char	t_bytes;
 

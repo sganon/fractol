@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 17:55:44 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/24 18:50:37 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	draw_color(t_env *e, int i, int x, int y)
 	t_color	u;
 	int		p;
 
-	if (i == e->i_max)
-		u.color = 0;
-	else
-		u.color = i * 100;
+	u.color = i * 2;
 	p = x * 4 + y * e->sl;
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
@@ -55,7 +52,8 @@ void	mandel(t_env *e)
 				e->z_i = 2 * e->z_i * tmp + e->c_i;
 				i++;
 			}
-			draw_color(e, i, x, y);
+			if (i != e->i_max)
+				draw_color(e, i, x, y);
 			y++;
 		}
 		x++;

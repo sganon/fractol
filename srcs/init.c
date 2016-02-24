@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 17:39:13 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/24 19:31:41 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		init_env(t_env *e)
 	e->max_y = 1.2;
 	e->img_x = WIN_X;
 	e->img_y = WIN_Y;
-	e->i_max = 50;
+	e->i_max = 42;
 	e->zoom_x = e->img_x / (e->max_x - e->min_x);
 	e->zoom_y = e->img_y / (e->max_y - e->min_y);
 	e->img_ptr = NULL;

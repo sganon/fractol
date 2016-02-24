@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/02/23 16:50:06 by sganon           ###   ########.fr        #
+#    Updated: 2016/02/24 15:07:30 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ O_FILES = $(SRC:.c=.o)
 
 CC = gcc
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Werror -Wextra -O3
 
 LIBFT_FLAG = -L./libft -lft
 

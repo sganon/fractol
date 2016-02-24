@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/23 18:34:17 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/24 15:12:28 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		expose_hook(t_env *e)
 	mandel(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	mlx_do_sync(e->mlx);
-	//ft_clean(e);
+	ft_clean(e);
 	return (0);
 }
 
