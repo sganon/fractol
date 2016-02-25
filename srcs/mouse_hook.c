@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/24 19:59:06 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/25 17:11:26 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int		mouse_events(int button, int x, int y, t_env *e)
 
 	mouse_x = get_mouse_x(x, e);
 	mouse_y = get_mouse_y(y, e);
-	printf("%f\n", mouse_x);
-	printf("%f\n", mouse_y);
 	if (button == 1)
 	{
 		e->min_x = mouse_x - k;
@@ -67,6 +65,8 @@ int		mouse_events(int button, int x, int y, t_env *e)
 	}
 	e->zoom_x = e->img_x / (e->max_x - e->min_x);
 	e->zoom_y = e->img_y / (e->max_y - e->min_y);
+	printf("zoom_x:%f\n", e->zoom_x);
+	printf("zoom_y:%f\n", e->zoom_y);
 	expose_hook(e);
 	return (0);
 }
