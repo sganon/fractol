@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/26 18:18:10 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/26 18:20:44 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	}
 }
 
-void	mandel(t_env *e)
+void	julia(t_env *e)
 {
 	int		x;
 	int		y;
@@ -40,10 +40,10 @@ void	mandel(t_env *e)
 		y = 0;
 		while (y < e->img_y)
 		{
-			e->c_r = x / e->zoom_x + e->min_x;
-			e->c_i = y / e->zoom_y + e->min_y;
-			e->z_r = 0;
-			e->z_i = 0;
+			e->c_r = 0.285;
+			e->c_i = 0.01;
+			e->z_r = x / e->zoom_x + e->min_x;
+			e->z_i = y / e->zoom_y + e->min_y;
 			i = 0;
 			while (e->z_r * e->z_r + e->z_i * e->z_i <= 4 && i < e->i_max)
 			{

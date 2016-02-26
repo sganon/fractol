@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/24 16:23:25 by sganon           ###   ########.fr       */
+/*   Updated: 2016/02/26 18:16:50 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 void	mandel(t_env *e);
+void	julia(t_env *e);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
 #endif
