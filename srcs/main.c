@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/26 18:17:52 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/02 13:40:47 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		expose_hook(t_env *e)
 {
 	if (e->img == NULL)
 		create_image(e);
-	julia(e);
+	mandel(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	mlx_do_sync(e->mlx);
 	ft_clean(e);
