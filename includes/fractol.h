@@ -13,7 +13,7 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "libft.h"
-# include <mlx.h>
+# include "mlx.h"
 # include <math.h>
 
 # define ESC			53
