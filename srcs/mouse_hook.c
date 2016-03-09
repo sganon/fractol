@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/02 15:18:14 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/02 15:24:56 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ double	get_complex_y(int y, t_env *e)
 
 int		mouse_events(int button, int x, int y, t_env *e)
 {
-	double	k = 0.5;
-	double	x_complex;
-	double	y_complex;
+	static double	k = 0.5;
+	double			x_complex;
+	double			y_complex;
 
 	x_complex = get_complex_x(x, e);
 	y_complex = get_complex_y(y, e);
@@ -58,6 +58,7 @@ int		mouse_events(int button, int x, int y, t_env *e)
 		e->max_y = y_complex - k;
 		printf("min_y:%f\n", e->min_y);
 		printf("max_y:%f\n", e->max_y);
+		k = k - 0.01;
 		e->i_max = e->i_max + 20;
 	}
 	e->zoom_x = e->img_x / (e->max_x - e->min_x);
