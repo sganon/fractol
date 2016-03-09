@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 16:13:03 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 17:50:02 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define WIN_X		900
 # define WIN_Y		900
 
+# define EM(x)			e->m->x
+# define EJ(x)			e->j->x
+
 typedef unsigned char	t_bytes;
 
 typedef struct			s_rgb
@@ -47,44 +50,55 @@ typedef union			u_color
 	t_rgb				rgb;
 }						t_color;
 
-typedef struct			s_env
+typedef struct			s_man
 {
-	void				*mlx;
-	void				*jwin;
 	void				*win;
 	double				min_x;
-	double				jmin_x;
 	double				max_x;
-	double				jmax_x;
 	double				min_y;
-	double				jmin_y;
 	double				max_y;
-	double				jmax_y;
 	double				c_r;
 	double				c_i;
+	double				z_r;
+	double				z_i;
+	double				zoom_x;
+	double				zoom_y;
+	void				*img_ptr;
+	char				*img;
+}						t_man;
+
+typedef struct			s_jul
+{
+	void				*jwin;
+	double				jmin_x;
+	double				jmax_x;
+	double				jmin_y;
+	double				jmax_y;
 	double				j_c_r;
 	double				j_c_i;
 	double				z_r;
 	double				z_i;
+	double				jzoom_x;
+	double				jzoom_y;
+	void				*jimg_ptr;
+	char				*jimg;
+}						t_jul;
+
+typedef struct			s_env
+{
+	void				*mlx;
 	double				r;
 	int					i_max;
 	double				img_x;
 	double				img_y;
-	double				zoom_x;
-	double				zoom_y;
-	double				jzoom_x;
-	double				jzoom_y;
 	int					end;
 	int					bpp;
 	int					sl;
-	void				*img_ptr;
-	char				*img;
-	void				*jimg_ptr;
-	char				*jimg;
+	t_man				*m;
+	t_jul				*j;
 }						t_env;
 
-int		init_env_for_mandel(t_env *e);
-int		init_env_for_julia(t_env *e);
+int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 void	mandel(t_env *e);

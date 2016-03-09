@@ -6,46 +6,41 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 16:12:53 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 17:41:15 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		init_env_for_mandel(t_env *e)
+int		init_mandel(t_man *m, t_env *e)
 {
-	if (!(e->mlx = mlx_init()))
+	if (!(m->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Mandelbrot")))
 		return (0);
-	if (!(e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Mandelbrot")))
-		return (0);
-	e->min_x = -2.1;
-	e->max_x = 0.6;
-	e->min_y = -1.2;
-	e->max_y = 1.2;
-	e->img_x = WIN_X;
-	e->img_y = WIN_Y;
-	e->i_max = 42;
-	e->zoom_x = e->img_x / (e->max_x - e->min_x);
-	e->zoom_y = e->img_y / (e->max_y - e->min_y);
-	e->img_ptr = NULL;
-	e->img = NULL;
+	m->min_x = -2.1;
+	m->max_x = 0.6;
+	m->min_y = -1.2;
+	m->max_y = 1.2;
+	m->zoom_x = e->img_x / (m->max_x - m->min_x);
+	m->zoom_y = e->img_y / (m->max_y - m->min_y);
+	m->img_ptr = NULL;
+	m->img = NULL;
 	return (1);
 }
 
-int		init_env_for_julia(t_env *e)
+int		init_julia(t_jul *j, t_env *e)
 {
-	if (!(e->jwin = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Julia")))
+	if (!(j->jwin = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Julia")))
 		return (0);
-	e->jmin_x = -2.1;
-	e->jmax_x = 2.1;
-	e->jmin_y = -1.2;
-	e->jmax_y = 1.2;
-	e->j_c_r = 0.285;
-	e->j_c_i = 0.01;
-	e->jzoom_x = e->img_x / (e->jmax_x - e->jmin_x);
-	e->jzoom_y = e->img_y / (e->jmax_y - e->jmin_y);
-	e->jimg_ptr = NULL;
-	e->jimg = NULL;
+	j->jmin_x = -2.1;
+	j->jmax_x = 2.1;
+	j->jmin_y = -1.2;
+	j->jmax_y = 1.2;
+	j->j_c_r = 0.285;
+	j->j_c_i = 0.01;
+	j->jzoom_x = e->img_x / (e->j->jmax_x - e->j->jmin_x);
+	j->jzoom_y = e->img_y / (e->j->jmax_y - e->j->jmin_y);
+	j->jimg_ptr = NULL;
+	j->jimg = NULL;
 	return (1);
 }
 
@@ -54,8 +49,22 @@ void	create_image(t_env *e)
 	e->end = 0;
 	e->bpp = 8;
 	e->sl = WIN_X;
-	e->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->img = mlx_get_data_addr(e->img_ptr, &(e->bpp), &(e->sl), &(e->end));
-	e->jimg_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->jimg = mlx_get_data_addr(e->jimg_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->j->jimg_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->j->jimg = mlx_get_data_addr(e->j->jimg_ptr, &(e->bpp), &(e->sl), &(e->end));
+}
+
+int		init_env(t_env *e)
+{
+	if (!(e->mlx = mlx_init()))
+		return (0);
+	e->i_max = 42;
+	e->img_x = WIN_X;
+	e->img_y = WIN_Y;
+	e->m = (t_man *)malloc(sizeof(t_man));
+	e->j = (t_jul *)malloc(sizeof(t_jul));
+	init_mandel(e->m , e);
+	init_julia(e->j, e);
+	return (1);
 }
