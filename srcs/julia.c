@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 17:34:19 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 18:21:24 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	p = x * 4 + y * e->sl;
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
-		e->j->jimg[p] = u.rgb.b;
-		e->j->jimg[p + 1] = u.rgb.g;
-		e->j->jimg[p + 2] = u.rgb.r;
+		e->j->img[p] = u.rgb.b;
+		e->j->img[p + 1] = u.rgb.g;
+		e->j->img[p + 2] = u.rgb.r;
 	}
 }
 
@@ -40,17 +40,17 @@ void	julia(t_env *e)
 		y = 0;
 		while (y < e->img_y)
 		{
-			e->j->z_r = x / e->j->jzoom_x + e->j->jmin_x;
-			e->j->z_i = y / e->j->jzoom_y + e->j->jmin_y;
+			e->j->z_r = x / e->j->zoom_x + e->j->min_x;
+			e->j->z_i = y / e->j->zoom_y + e->j->min_y;
 			i = 0;
-			while (e->j->z_r * e->j->z_r + e->j->z_i * e->j->z_i <= 4 && i < e->i_max)
+			while (e->j->z_r * e->j->z_r + e->j->z_i * e->j->z_i <= 4 && i < e->j->i_max)
 			{
 				tmp = e->j->z_r;
-				e->j->z_r = e->j->z_r * e->j->z_r - e->j->z_i * e->j->z_i + e->j->j_c_r;
-				e->j->z_i = 2 * e->j->z_i * tmp + e->j->j_c_i;
+				e->j->z_r = e->j->z_r * e->j->z_r - e->j->z_i * e->j->z_i + e->j->c_r;
+				e->j->z_i = 2 * e->j->z_i * tmp + e->j->c_i;
 				i++;
 			}
-			if (i != e->i_max)
+			if (i != e->j->i_max)
 				draw_color(e, i, x, y);
 			y++;
 		}

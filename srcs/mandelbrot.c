@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 17:37:12 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 18:21:47 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	mandel(t_env *e)
 			e->m->z_r = 0;
 			e->m->z_i = 0;
 			i = 0;
-			while (e->m->z_r * e->m->z_r + e->m->z_i * e->m->z_i <= 4 && i < e->i_max)
+			while (e->m->z_r * e->m->z_r + e->m->z_i * e->m->z_i <= 4 && i < e->m->i_max)
 			{
 				tmp = e->m->z_r;
 				e->m->z_r = e->m->z_r * e->m->z_r - e->m->z_i * e->m->z_i + e->m->c_r;
 				e->m->z_i = 2 * e->m->z_i * tmp + e->m->c_i;
 				i++;
 			}
-			if (i != e->i_max)
+			if (i != e->m->i_max)
 				draw_color(e, i, x, y);
 			y++;
 		}

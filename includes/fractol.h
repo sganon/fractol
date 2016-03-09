@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 17:50:02 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 18:58:03 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,31 @@ typedef struct			s_man
 	double				zoom_y;
 	void				*img_ptr;
 	char				*img;
+	int					i_max;
 }						t_man;
 
 typedef struct			s_jul
 {
-	void				*jwin;
-	double				jmin_x;
-	double				jmax_x;
-	double				jmin_y;
-	double				jmax_y;
-	double				j_c_r;
-	double				j_c_i;
+	void				*win;
+	double				min_x;
+	double				max_x;
+	double				min_y;
+	double				max_y;
+	double				c_r;
+	double				c_i;
 	double				z_r;
 	double				z_i;
-	double				jzoom_x;
-	double				jzoom_y;
-	void				*jimg_ptr;
-	char				*jimg;
+	double				zoom_x;
+	double				zoom_y;
+	void				*img_ptr;
+	char				*img;
+	int					i_max;
 }						t_jul;
 
 typedef struct			s_env
 {
 	void				*mlx;
 	double				r;
-	int					i_max;
 	double				img_x;
 	double				img_y;
 	int					end;
@@ -96,13 +97,19 @@ typedef struct			s_env
 	int					sl;
 	t_man				*m;
 	t_jul				*j;
+	int					mandel;
+	int					jul;
 }						t_env;
 
 int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
+int		julia_mouse_events(int button, int x, int y, t_env *e);
+int		move_c(int x, int y, t_env *e);
+int		check_argv(int argc, char **argv, t_env *e);
 void	mandel(t_env *e);
 void	julia(t_env *e);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
+void	ft_error(int error);
 #endif

@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/03/09 12:52:04 by sganon           ###   ########.fr        #
+#    Updated: 2016/03/09 18:58:43 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ SRC =	main.c \
 		init.c \
 		key_hook.c \
 		mouse_hook.c \
+		julia_mouse_hook.c \
 		mandelbrot.c \
 		julia.c \
+		error.c \
+		arguments.c \
 
 SRC_LIST =	$(addprefix srcs/, $(SRC))
 

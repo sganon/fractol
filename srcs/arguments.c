@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:41:49 by sganon           ###   ########.fr       */
+/*   Created: 2016/03/09 18:46:04 by sganon            #+#    #+#             */
+/*   Updated: 2016/03/09 18:59:14 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include	"fractol.h"
 
-int		key_events(int keycode, t_env *e)
+int		check_argv(int argc, char **argv, t_env *e)
 {
-	(void)e;
-	if (keycode == ESC)
-		exit(0);
-	return (0);
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (++i < argc)
+	{
+		if (ft_strcmp(argv[i], "Mandelbrot") == 0)
+		{
+			e->mandel = 1;
+			c++;
+		}
+		else if (ft_strcmp(argv[i], "Julia") == 0)
+		{
+			e->jul = 1; 
+			c++;
+		}
+	}
+	if (c == 0)
+		ft_error(1);
+	return (1);
 }

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:41:49 by sganon           ###   ########.fr       */
+/*   Created: 2016/03/09 18:36:21 by sganon            #+#    #+#             */
+/*   Updated: 2016/03/09 18:59:55 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		key_events(int keycode, t_env *e)
+void	ft_error(int error)
 {
-	(void)e;
-	if (keycode == ESC)
-		exit(0);
-	return (0);
+	if (error == 0)
+		ft_putendl("Please enter between 1 and 3 arguments.");
+	ft_putendl("Valid arguments:\tMandelbrot;\n\t\t\tJulia;");
+	exit(0);
 }

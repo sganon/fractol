@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 17:44:59 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 18:42:31 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ double	get_complex_x(int x, t_env *e)
 		c_x = (x - (WIN_X / 2)) * ((-e->m->min_x / 2) / (WIN_X / 4));
 	return (c_x);
 }
+
 double	get_complex_y(int y, t_env *e)
 {
 	double	c_y;
@@ -66,7 +67,7 @@ int		mouse_events(int button, int x, int y, t_env *e)
 			e->m->max_y = tmp;
 		}
 		k = k * 0.1;
-		e->i_max = e->i_max + 15;
+		e->m->i_max += 15;
 	}
 	e->m->zoom_x = e->img_x / (e->m->max_x - e->m->min_x);
 	e->m->zoom_y = e->img_y / (e->m->max_y - e->m->min_y);
