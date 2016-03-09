@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/02/26 18:17:29 by sganon           ###   ########.fr        #
+#    Updated: 2016/03/09 12:52:04 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC_FLAGS = -Wall -Werror -Wextra -O3
 
 LIBFT_FLAG = -L./libft -lft
 
-MLX_FLAG = -lmlx -framework AppKit -framework OpenGL 
+MLX_FLAG = -L./mlx -lmlx -framework AppKit -framework OpenGL 
 
 INC_FLAG = -I./includes
 
@@ -37,7 +37,9 @@ all : $(NAME)
 
 $(NAME): 
 		@make -C libft/ fclean
+		@make -C mlx/ clean
 		@make -C libft/
+		@make -C mlx/
 		@echo "Libft compiled."
 		@$(CC) $(CC_FLAGS) -c $(SRC_LIST) $(INC_FLAG)
 		@echo "Objects compiled."
@@ -47,6 +49,7 @@ $(NAME):
 clean:
 		@rm -f $(O_FILES)
 		@make -C libft/ fclean
+		@make -C mlx/ clean
 		@echo "Objects and libraries cleaned."
 
 fclean : clean
