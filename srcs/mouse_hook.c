@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:42:31 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 20:33:49 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ double	get_complex_y(int y, t_env *e)
 int		mouse_events(int button, int x, int y, t_env *e)
 {
 	double			tmp;
-	static double	k = 0.25;
 	double			x_complex;
 	double			y_complex;
 
@@ -50,10 +49,10 @@ int		mouse_events(int button, int x, int y, t_env *e)
 	y_complex = get_complex_y(y, e);
 	if (button == 1)
 	{
-		e->m->min_x = x_complex + 3 * k;//fabs((e->min_x + x_complex) / 2);
-		e->m->max_x = x_complex - k;//fabs((e->max_x + x_complex) / 2);
-		e->m->min_y = y_complex + k;//fabs((e->min_y + y_complex) / 2);
-		e->m->max_y = y_complex - k;//fabs((e->max_y + y_complex) / 2);
+		e->m->min_x = x_complex - 0.6;
+		e->m->max_x = x_complex + 0.6; 
+		e->m->min_y = y_complex + 0.3;
+		e->m->max_y = y_complex - 0.3;
 		if (e->m->min_x > e->m->max_x)
 		{
 			tmp = e->m->min_x;
@@ -66,7 +65,6 @@ int		mouse_events(int button, int x, int y, t_env *e)
 			e->m->min_y = e->m->max_y;
 			e->m->max_y = tmp;
 		}
-		k = k * 0.1;
 		e->m->i_max += 15;
 	}
 	e->m->zoom_x = e->img_x / (e->m->max_x - e->m->min_x);

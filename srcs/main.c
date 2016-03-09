@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 19:14:05 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 19:54:01 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		main(int argc, char **argv)
 	if (e->jul)
 	{
 		mlx_key_hook(EJ(win), key_events, e);
-		//mlx_mouse_hook(EJ(win), julia_mouse_events, e);
+		mlx_mouse_hook(EJ(win), julia_mouse_events, e);
 		mlx_expose_hook(EJ(win), expose_hook, e);
 		if (!(e->mandel))
 			mlx_hook(EJ(win), 6, (1L<<6), move_c, e);
