@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/02/26 18:16:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 16:13:03 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,20 @@ typedef union			u_color
 typedef struct			s_env
 {
 	void				*mlx;
+	void				*jwin;
 	void				*win;
 	double				min_x;
+	double				jmin_x;
 	double				max_x;
+	double				jmax_x;
 	double				min_y;
+	double				jmin_y;
 	double				max_y;
+	double				jmax_y;
 	double				c_r;
 	double				c_i;
+	double				j_c_r;
+	double				j_c_i;
 	double				z_r;
 	double				z_i;
 	double				r;
@@ -65,14 +72,19 @@ typedef struct			s_env
 	double				img_y;
 	double				zoom_x;
 	double				zoom_y;
+	double				jzoom_x;
+	double				jzoom_y;
 	int					end;
 	int					bpp;
 	int					sl;
 	void				*img_ptr;
 	char				*img;
+	void				*jimg_ptr;
+	char				*jimg;
 }						t_env;
 
-int		init_env(t_env *e);
+int		init_env_for_mandel(t_env *e);
+int		init_env_for_julia(t_env *e);
 int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 void	mandel(t_env *e);
