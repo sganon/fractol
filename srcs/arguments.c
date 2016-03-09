@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:46:04 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:59:14 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 19:10:51 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		check_argv(int argc, char **argv, t_env *e)
 
 	i = 0;
 	c = 0;
+	e->mandel = 0;
+	e->jul = 0;
 	while (++i < argc)
 	{
 		if (ft_strcmp(argv[i], "Mandelbrot") == 0)

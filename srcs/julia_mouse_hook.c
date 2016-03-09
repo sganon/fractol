@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:08:25 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:30:03 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/09 19:28:51 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,21 @@
 double	julia_get_complex_x(int x, t_env *e)
 {
 	double	c_x;
-
-	if (x > (WIN_X / 2))
-		c_x = (x - (WIN_X / 2)) * (e->j->max_x / (WIN_X / 2));
+	
+	if (e->mandel)
+	{
+		if (x > (WIN_X / 2))
+			c_x = (x - (WIN_X / 2)) * (e->m->max_x / (WIN_X / 2));
+		else
+			c_x = (x - (WIN_X / 2)) * ((-e->m->min_x / 2) / (WIN_X / 4));
+	}
 	else
-		c_x = (x - (WIN_X / 2)) * ((-e->j->min_x / 2) / (WIN_X / 4));
+	{
+		if (x > (WIN_X / 2))
+			c_x = (x - (WIN_X / 2)) * (e->j->max_x / (WIN_X / 2));
+		else
+			c_x = (x - (WIN_X / 2)) * ((-e->j->min_x / 2) / (WIN_X / 4));
+	}
 	return (c_x);
 }
 
@@ -27,10 +37,20 @@ double	julia_get_complex_y(int y, t_env *e)
 {
 	double	c_y;
 
-	if (y > (WIN_Y / 2))
-		c_y = ((WIN_Y / 2) - y) * (-e->j->min_y / (WIN_Y / 2));
+	if (e->mandel)
+	{
+		if (y > (WIN_Y / 2))
+			c_y = ((WIN_Y / 2) - y) * (-e->m->min_y / (WIN_Y / 2));
+		else
+			c_y = ((WIN_Y / 2) - y) * ((e->m->max_y / 2) / (WIN_Y / 4));
+	}
 	else
-		c_y = ((WIN_Y / 2) - y) * ((e->j->max_y / 2) / (WIN_Y / 4));
+	{
+		if (y > (WIN_Y / 2))
+			c_y = ((WIN_Y / 2) - y) * (-e->j->min_y / (WIN_Y / 2));
+		else
+			c_y = ((WIN_Y / 2) - y) * ((e->j->max_y / 2) / (WIN_Y / 4));
+	}
 	return (c_y);
 }
 
