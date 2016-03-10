@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 19:06:07 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/10 17:46:31 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ int		init_julia(t_jul *j, t_env *e)
 	return (1);
 }
 
+int		init_pytha(t_pytha *p, t_env *e)
+{
+	if (!(p->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Pythagore")))
+		return (0);
+	return (1);
+}
+
 void	create_image(t_env *e)
 {
 	e->end = 0;
@@ -55,6 +62,8 @@ void	create_image(t_env *e)
 	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->j->img = mlx_get_data_addr(e->j->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->p->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->p->img = mlx_get_data_addr(e->p->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 }
 
 int		init_env(t_env *e)
@@ -65,9 +74,12 @@ int		init_env(t_env *e)
 	e->img_y = WIN_Y;
 	e->m = (t_man *)malloc(sizeof(t_man));
 	e->j = (t_jul *)malloc(sizeof(t_jul));
+	e->p = (t_pytha *)malloc(sizeof(t_pytha));
 	if (e->mandel)
 		init_mandel(e->m , e);
 	if (e->jul)
 		init_julia(e->j, e);
+	if (e->pytha)
+		init_pytha(e->p, e);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:08:25 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 19:53:21 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/10 14:48:31 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int		julia_mouse_events(int button, int x, int y, t_env *e)
 	{
 		x_complex = julia_get_complex_x(x, e);
 		y_complex = julia_get_complex_y(y, e);
-		e->j->min_x = x_complex - k;
-		e->j->min_y = y_complex - k;
-		e->j->max_x = x_complex + k;
-		e->j->max_y = y_complex + k;
+		e->j->min_x += x_complex / 2;
+		e->j->min_y += y_complex / 2;
+		e->j->max_x -= x_complex * 2;
+		e->j->max_y -= y_complex * 2;
 		k = k * 0.9;
 		e->j->i_max += 10;
 		expose_hook(e);

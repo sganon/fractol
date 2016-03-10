@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 18:58:03 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/10 17:43:11 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef union			u_color
 	size_t				color;
 	t_rgb				rgb;
 }						t_color;
+
+typedef struct			s_pytha
+{
+	void				*win;
+	void				*img_ptr;
+	char				*img;
+}						t_pytha;
 
 typedef struct			s_man
 {
@@ -97,8 +104,10 @@ typedef struct			s_env
 	int					sl;
 	t_man				*m;
 	t_jul				*j;
+	t_pytha				*p;
 	int					mandel;
 	int					jul;
+	int					pytha;
 }						t_env;
 
 int		init_env(t_env *e);
@@ -109,6 +118,7 @@ int		move_c(int x, int y, t_env *e);
 int		check_argv(int argc, char **argv, t_env *e);
 void	mandel(t_env *e);
 void	julia(t_env *e);
+void	pytha(t_env *e);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);

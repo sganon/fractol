@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/09 19:54:01 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/10 17:47:15 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	ft_clean(t_env *e)
 			e->j->img[p] = 0;
 			e->j->img[p + 1] = 0;
 			e->j->img[p + 2] = 0;
+			e->p->img[p] = 0;
+			e->p->img[p + 1] = 0;
+			e->p->img[p + 2] = 0;
 			x++;
 		}
 		y++;
@@ -40,7 +43,7 @@ void	ft_clean(t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	if (e->m->img == NULL || e->j->img == NULL)
+	if (e->m->img == NULL || e->j->img == NULL || e->p->img == NULL)
 		create_image(e);
 	if (e->mandel)
 	{
@@ -51,6 +54,11 @@ int		expose_hook(t_env *e)
 	{
 		julia(e);
 		mlx_put_image_to_window(e->mlx, e->j->win, e->j->img_ptr, 0, 0);
+	}
+	if (e->pytha)
+	{
+		pytha(e);
+		mlx_put_image_to_window(e->mlx, e->p->win, e->p->img_ptr, 0, 0);
 	}
 	mlx_do_sync(e->mlx);
 	ft_clean(e);
@@ -82,6 +90,11 @@ int		main(int argc, char **argv)
 		mlx_expose_hook(EJ(win), expose_hook, e);
 		if (!(e->mandel))
 			mlx_hook(EJ(win), 6, (1L<<6), move_c, e);
+	}
+	if (e->pytha)
+	{
+		mlx_key_hook(e->p->win, key_events, e);
+		mlx_expose_hook(e->p->win, expose_hook, e);
 	}
 	if (e->jul && e->mandel)
 		mlx_hook(EM(win), 6, (1L<<6), move_c, e);
