@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/10 17:43:11 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/11 17:44:55 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define EM(x)			e->m->x
 # define EJ(x)			e->j->x
 
+# define ABS(x)			((x) < 0 ? -(x) : (x))
+
 typedef unsigned char	t_bytes;
 
 typedef struct			s_rgb
@@ -50,12 +52,22 @@ typedef union			u_color
 	t_rgb				rgb;
 }						t_color;
 
-typedef struct			s_pytha
+typedef struct			s_point
+{
+	int					x;
+	int					y;
+}						t_point;
+
+typedef struct			s_sierp
 {
 	void				*win;
 	void				*img_ptr;
 	char				*img;
-}						t_pytha;
+	int					x;
+	int					y;
+	int					a;
+	int					i;
+}						t_sierp;
 
 typedef struct			s_man
 {
@@ -104,10 +116,10 @@ typedef struct			s_env
 	int					sl;
 	t_man				*m;
 	t_jul				*j;
-	t_pytha				*p;
+	t_sierp				*s;
 	int					mandel;
 	int					jul;
-	int					pytha;
+	int					sierp;
 }						t_env;
 
 int		init_env(t_env *e);
@@ -118,7 +130,7 @@ int		move_c(int x, int y, t_env *e);
 int		check_argv(int argc, char **argv, t_env *e);
 void	mandel(t_env *e);
 void	julia(t_env *e);
-void	pytha(t_env *e);
+void	sierp(t_env *e, int x, int y, int a, int i);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);

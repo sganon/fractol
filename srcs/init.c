@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/10 17:46:31 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/11 17:13:12 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ int		init_julia(t_jul *j, t_env *e)
 	return (1);
 }
 
-int		init_pytha(t_pytha *p, t_env *e)
+int		init_sierp(t_sierp *s, t_env *e)
 {
-	if (!(p->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Pythagore")))
+	if (!(s->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Pythagore")))
 		return (0);
+	s->x = WIN_X / 2 - 120;
+	s->y = WIN_Y;
+	s->a = 240;
+	s->i = 7;
 	return (1);
 }
 
@@ -62,8 +66,8 @@ void	create_image(t_env *e)
 	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->j->img = mlx_get_data_addr(e->j->img_ptr, &(e->bpp), &(e->sl), &(e->end));
-	e->p->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->p->img = mlx_get_data_addr(e->p->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->s->img = mlx_get_data_addr(e->s->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 }
 
 int		init_env(t_env *e)
@@ -74,12 +78,12 @@ int		init_env(t_env *e)
 	e->img_y = WIN_Y;
 	e->m = (t_man *)malloc(sizeof(t_man));
 	e->j = (t_jul *)malloc(sizeof(t_jul));
-	e->p = (t_pytha *)malloc(sizeof(t_pytha));
+	e->s = (t_sierp *)malloc(sizeof(t_sierp));
 	if (e->mandel)
 		init_mandel(e->m , e);
 	if (e->jul)
 		init_julia(e->j, e);
-	if (e->pytha)
-		init_pytha(e->p, e);
+	if (e->sierp)
+		init_sierp(e->s, e);
 	return (1);
 }

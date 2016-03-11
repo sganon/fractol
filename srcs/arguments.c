@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:46:04 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/10 17:40:43 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/11 17:06:07 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		check_argv(int argc, char **argv, t_env *e)
 	c = 0;
 	e->mandel = 0;
 	e->jul = 0;
-	e->pytha = 0;
+	e->sierp = 0;
 	while (++i < argc)
 	{
 		if (ft_strcmp(argv[i], "Mandelbrot") == 0)
@@ -34,9 +34,9 @@ int		check_argv(int argc, char **argv, t_env *e)
 			e->jul = 1; 
 			c++;
 		}
-		else if (ft_strcmp(argv[i], "Pythagore") == 0)
+		else if (ft_strcmp(argv[i], "Sierpinski") == 0)
 		{
-			e->pytha = 1; 
+			e->sierp = 1; 
 			c++;
 		}
 	}

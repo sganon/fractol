@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/03/10 17:42:26 by sganon           ###   ########.fr        #
+#    Updated: 2016/03/11 17:03:18 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC =	main.c \
 		julia.c \
 		error.c \
 		arguments.c \
-		pytha.c \
+		sierp.c \
 
 SRC_LIST =	$(addprefix srcs/, $(SRC))
 
