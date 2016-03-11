@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 18:01:25 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/11 18:57:25 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,21 @@ static void	draw_color(t_env *e, int x, int y)
 
 void	triangle(int x, int y, int a, int b, t_env *e)
 {
-	while (y > y + b)
+	int	s_x;
+	int	s_y;
+	int	c;
+
+	c = 0;
+	s_y = WIN_Y - 1;
+	while (s_y > y + b)
 	{
-		x = WIN_X / 2 - 60;
-		while (x < x + a)
+		s_x = WIN_X / 2 - 60 + c;
+		while (s_x < x + a - c)
 		{
-			draw_color(e, x, y - 1);
-			x++;
+			draw_color(e, s_x, s_y);
+			s_x++;
 		}
-		x++;
-		a--;
-		y--;
+		s_y--;
 	}
 }
 

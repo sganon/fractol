@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 17:13:12 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/11 18:47:29 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		init_julia(t_jul *j, t_env *e)
 
 int		init_sierp(t_sierp *s, t_env *e)
 {
-	if (!(s->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Pythagore")))
+	if (!(s->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Sierpinski")))
 		return (0);
 	s->x = WIN_X / 2 - 120;
 	s->y = WIN_Y;
@@ -61,7 +61,7 @@ void	create_image(t_env *e)
 {
 	e->end = 0;
 	e->bpp = 8;
-	e->sl = WIN_X;
+e->sl = WIN_X;
 	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
