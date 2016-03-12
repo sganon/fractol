@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 16:14:36 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 17:24:22 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		init_mandel(t_man *m, t_env *e)
 	m->img_ptr = NULL;
 	m->img = NULL;
 	m->i_max = 42;
+	m->x_complex = 420;
+	m->y_complex = 420;
 	return (1);
 }
 

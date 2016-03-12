@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 15:57:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 17:26:42 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ double	get_complex_y(int y, t_env *e)
 
 int		mouse_events(int button, int x, int y, t_env *e)
 {
-	double			x_complex;
-	double			y_complex;
 	static double	k = 0.19;
 
-	x_complex = get_complex_x(x, e);
-	y_complex = get_complex_y(y, e);
-	printf("x_complex: %f\n", x_complex);
-	printf("y_complex: %f\n", y_complex);
+	if (e->m->x_complex == 420 && e->m->y_complex == 420)
+	{
+		e->m->x_complex = get_complex_x(x, e);
+		e->m->y_complex = get_complex_y(y, e);
+	}
+	printf("x_complex: %f\n", e->m->x_complex);
+	printf("y_complex: %f\n", e->m->y_complex);
 	if (button == 1)
 	{
-		e->m->min_x = x_complex - k * 3;
-		e->m->max_x = x_complex + k; 
-		e->m->min_y = y_complex + k * 2;
-		e->m->max_y = y_complex - k * 2;
+		e->m->min_x = e->m->x_complex - k / 3.5;
+		e->m->max_x = e->m->x_complex + k; 
+		e->m->min_y = e->m->y_complex + k / 2;
+		e->m->max_y = e->m->y_complex - k / 2;
 		printf("max_x: %f\n", e->m->max_x);
 		printf("min_x: %f\n", e->m->min_x);
 		printf("max_y: %f\n", e->m->max_y);

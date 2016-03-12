@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 16:06:14 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 17:21:06 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct			s_man
 	void				*img_ptr;
 	char				*img;
 	int					i_max;
+	double				x_complex;
+	double				y_complex;
 }						t_man;
 
 typedef struct			s_jul

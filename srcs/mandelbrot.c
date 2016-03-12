@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 16:30:09 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 17:19:30 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	int		p;
 
 	p = x * 4 + y * e->sl;
-	u.color = i * 4;
+	u.color = i * 6;
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
 		e->m->img[p] = u.rgb.b;

@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 18:47:31 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 16:46:28 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		main(int argc, char **argv)
 {
 	t_env	*e;
 
-	if (argc <= 1 || argc > 3)
+	if (argc <= 1 || argc > 4)
 		ft_error(0);
 	e = (t_env *)malloc(sizeof(t_env));
 	check_argv(argc, argv, e);
