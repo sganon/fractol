@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 17:44:55 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 16:06:14 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define MINUS			78
 # define PLUS			69
 # define KEY_C			8
+# define KEY_I			34
 # define STAR			67
 # define SLASH			75
 # define WHEEL_UP		4

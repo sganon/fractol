@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/11 18:47:29 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/12 16:14:36 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int		init_sierp(t_sierp *s, t_env *e)
 {
 	if (!(s->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Sierpinski")))
 		return (0);
-	s->x = WIN_X / 2 - 120;
-	s->y = WIN_Y;
-	s->a = 240;
-	s->i = 7;
+	s->x = WIN_X / 2 - 400;
+	s->y = WIN_Y - 100;
+	s->a = 800;
+	s->i = 3;
 	return (1);
 }
 
