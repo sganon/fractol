@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 17:24:22 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/13 16:58:42 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		init_mandel(t_man *m, t_env *e)
 	m->zoom_y = e->img_y / (m->max_y - m->min_y);
 	m->img_ptr = NULL;
 	m->img = NULL;
-	m->i_max = 42;
+	m->i_max = 70;
 	m->x_complex = 420;
 	m->y_complex = 420;
 	return (1);
@@ -44,7 +44,7 @@ int		init_julia(t_jul *j, t_env *e)
 	j->zoom_y = e->img_y / (e->j->max_y - e->j->min_y);
 	j->img_ptr = NULL;
 	j->img = NULL;
-	j->i_max = 42;
+	j->i_max = 70;
 	return (1);
 }
 
