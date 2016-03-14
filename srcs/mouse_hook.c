@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 12:08:53 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:59:17 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,31 @@ int		julia_mouse_events(int button, int x, int y, t_env *e)
 	}
 	e->j->zoom_x = e->img_x / (e->j->max_x - e->j->min_x);
 	e->j->zoom_y = e->img_y / (e->j->max_y - e->j->min_y);
+	expose_hook(e);
+	return (0);
+}
+
+int		ship_mouse_events(int button, int x, int y, t_env *e)
+{
+	double	x_complex;
+	double	y_complex;
+	static double k = 0.78;
+
+	x_complex = x / e->sh->zoom_x + e->sh->min_x;
+	y_complex = y / e->sh->zoom_y + e->sh->min_y;
+	if (button == 2 || button == WHEEL_DOWN)
+		k /= 0.5;
+	if (button == 1 || button == WHEEL_UP)
+	{
+		e->sh->max_x = x_complex + k;
+		e->sh->min_x = x_complex - k;
+		e->sh->max_y = y_complex + k;
+		e->sh->min_y = y_complex - k;
+		e->sh->i_max += 15;
+		k *= 0.5;
+	}
+	e->sh->zoom_x = e->img_x / (e->sh->max_x - e->sh->min_x);
+	e->sh->zoom_y = e->img_y / (e->sh->max_y - e->sh->min_y);
 	expose_hook(e);
 	return (0);
 }

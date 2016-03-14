@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/03/14 12:01:01 by sganon           ###   ########.fr        #
+#    Updated: 2016/03/14 14:44:39 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC =	main.c \
 		error.c \
 		arguments.c \
 		sierp.c \
+		ship.c \
 
 SRC_LIST =	$(addprefix srcs/, $(SRC))
 

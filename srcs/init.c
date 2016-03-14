@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 12:57:57 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 15:05:34 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,22 @@ int		init_mandel(t_man *m, t_env *e)
 	m->img_ptr = NULL;
 	m->img = NULL;
 	m->i_max = 70;
-	m->x_complex = 420;
-	m->y_complex = 420;
+	return (1);
+}
+
+int		init_ship(t_ship *sh, t_env *e)
+{
+	if (!(sh->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Burning Ship")))
+		return (0);
+	sh->min_x = -2.1;
+	sh->max_x = 0.39;
+	sh->min_y = -2.5;
+	sh->max_y = 0.5;
+	sh->zoom_x = e->img_x / (sh->max_x - sh->min_x);
+	sh->zoom_y = e->img_y / (sh->max_y - sh->min_y);
+	sh->img_ptr = NULL;
+	sh->img = NULL;
+	sh->i_max = 100;
 	return (1);
 }
 
@@ -63,13 +77,15 @@ void	create_image(t_env *e)
 {
 	e->end = 0;
 	e->bpp = 8;
-e->sl = WIN_X;
+	e->sl = WIN_X;
 	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->j->img = mlx_get_data_addr(e->j->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->s->img = mlx_get_data_addr(e->s->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->sh->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->sh->img = mlx_get_data_addr(e->sh->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 }
 
 int		init_env(t_env *e)
@@ -78,6 +94,7 @@ int		init_env(t_env *e)
 		return (0);
 	e->img_x = WIN_X;
 	e->img_y = WIN_Y;
+	e->sh = (t_ship *)malloc(sizeof(t_ship));
 	e->m = (t_man *)malloc(sizeof(t_man));
 	e->j = (t_jul *)malloc(sizeof(t_jul));
 	e->s = (t_sierp *)malloc(sizeof(t_sierp));
@@ -88,5 +105,7 @@ int		init_env(t_env *e)
 		init_julia(e->j, e);
 	if (e->sierp)
 		init_sierp(e->s, e);
+	if (e->ship)
+		init_ship(e->sh, e);
 	return (1);
 }

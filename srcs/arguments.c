@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:46:04 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 16:46:08 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:51:48 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		check_argv(int argc, char **argv, t_env *e)
 	e->mandel = 0;
 	e->jul = 0;
 	e->sierp = 0;
+	e->ship = 0;
 	while (++i < argc)
 	{
 		if (ft_strcmp(argv[i], "Mandelbrot") == 0)
@@ -37,6 +38,11 @@ int		check_argv(int argc, char **argv, t_env *e)
 		else if (ft_strcmp(argv[i], "Sierpinski") == 0)
 		{
 			e->sierp = 1; 
+			c++;
+		}
+		else if (ft_strcmp(argv[i], "Ship") == 0)
+		{
+			e->ship = 1; 
 			c++;
 		}
 	}

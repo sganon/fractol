@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 14:08:06 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:58:51 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ typedef struct			s_point
 	int					y;
 }						t_point;
 
+typedef struct			s_ship
+{
+	void				*win;
+	double				min_x;
+	double				max_x;
+	double				min_y;
+	double				max_y;
+	double				c_r;
+	double				c_i;
+	double				z_r;
+	double				z_i;
+	double				zoom_x;
+	double				zoom_y;
+	void				*img_ptr;
+	char				*img;
+	int					i_max;
+}						t_ship;
+
 typedef struct			s_sierp
 {
 	void				*win;
@@ -86,8 +104,6 @@ typedef struct			s_man
 	void				*img_ptr;
 	char				*img;
 	int					i_max;
-	double				x_complex;
-	double				y_complex;
 }						t_man;
 
 typedef struct			s_jul
@@ -120,9 +136,11 @@ typedef struct			s_env
 	t_man				*m;
 	t_jul				*j;
 	t_sierp				*s;
+	t_ship				*sh;
 	int					mandel;
 	int					jul;
 	int					sierp;
+	int					ship;
 	int					c;
 }						t_env;
 
@@ -130,11 +148,13 @@ int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 int		julia_mouse_events(int button, int x, int y, t_env *e);
+int		ship_mouse_events(int button, int x, int y, t_env *e);
 int		move_c(int x, int y, t_env *e);
 int		check_argv(int argc, char **argv, t_env *e);
 void	mandel(t_env *e);
 void	julia(t_env *e);
 void	sierp(t_env *e, int x, int y, int a, int i);
+void	ship(t_env *e);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);
