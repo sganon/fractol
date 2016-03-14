@@ -6,59 +6,76 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/13 17:26:54 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 11:59:28 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-//
-//
-//
-#include <stdio.h>
 
-
-double	get_complex_x(int x, t_env *e)
+int		move_c(int x, int y, t_env *e)
 {
-	double	x_o;
-	double	c_x;
+	double		x_complex;
+	double		y_complex;
 
-	x_o = WIN_X - (WIN_X * (e->m->max_x / -e->m->min_x));
-	c_x = x - x_o;
-	c_x = c_x * (e->m->max_x / (WIN_X * (e->m->max_x / -e->m->min_x)));
-	return (c_x);
+	if (x <= WIN_X && y <= WIN_Y)
+	{
+		if (e->mandel)
+		{
+			x_complex = x / e->m->zoom_x + e->m->min_x;
+			y_complex = y / e->m->zoom_y + e->m->min_y;
+		}
+		else
+		{
+			x_complex = x / e->j->zoom_x + e->j->min_x;
+			y_complex = y / e->j->zoom_y + e->j->min_y;
+		}
+		e->j->c_r = x_complex;
+		e->j->c_i = y_complex;
+		expose_hook(e);
+		return (1);
+	}
+	return (0);
 }
 
-double	get_complex_y(int y, t_env *e)
+int		julia_mouse_events(int button, int x, int y, t_env *e)
 {
-	double y_o;
-	double	c_y;
+	static double	k = 0.78;
+	double			x_complex;
+	double			y_complex;
 
-	y_o = WIN_Y / 2;
-	c_y = y_o - y;
-	c_y = c_y * (-e->m->min_y / WIN_Y);
-	return (c_y * 2);
+	if (button == 1 && x <= WIN_X && y > 30)
+	{
+		x_complex = x / e->j->zoom_x + e->j->min_x;
+		y_complex = y / e->j->zoom_y + e->j->min_y;
+		e->j->min_x = x_complex - k;
+		e->j->min_y = y_complex - k;
+		e->j->max_x = x_complex + k;
+		e->j->max_y = y_complex + k;
+		k = k * 0.5;
+		e->j->i_max += 10;
+	}
+	e->j->zoom_x = e->img_x / (e->j->max_x - e->j->min_x);
+	e->j->zoom_y = e->img_y / (e->j->max_y - e->j->min_y);
+	expose_hook(e);
+	return (0);
 }
 
 int		mouse_events(int button, int x, int y, t_env *e)
 {
 	double	x_complex;
 	double	y_complex;
+	static double k = 0.78;
 
-	x_complex = get_complex_x(x, e);
-	y_complex = get_complex_y(y, e);
-	printf("x_complex: %f\n", x_complex);
-	printf("y_complex: %f\n", y_complex);
+	x_complex = x / e->m->zoom_x + e->m->min_x;
+	y_complex = y / e->m->zoom_y + e->m->min_y;
 	if (button == 1)
 	{
-		e->m->min_x = x_complex - 0.08;
-		e->m->max_x = x_complex + 0.08;
-		e->m->min_y = y_complex - 0.08;
-		e->m->max_y = y_complex + 0.08;
-		printf("max_x: %f\n", e->m->max_x);
-		printf("min_x: %f\n", e->m->min_x);
-		printf("max_y: %f\n", e->m->max_y);
-		printf("min_y: %f\n", e->m->min_y);
+		e->m->max_x = x_complex + k;
+		e->m->min_x = x_complex - k;
+		e->m->max_y = y_complex + k;
+		e->m->min_y = y_complex - k;
 		e->m->i_max += 15;
+		k *= 0.5;
 	}
 	e->m->zoom_x = e->img_x / (e->m->max_x - e->m->min_x);
 	e->m->zoom_y = e->img_y / (e->m->max_y - e->m->min_y);
