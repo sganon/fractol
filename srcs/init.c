@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 11:35:34 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 12:57:57 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		init_env(t_env *e)
 	e->m = (t_man *)malloc(sizeof(t_man));
 	e->j = (t_jul *)malloc(sizeof(t_jul));
 	e->s = (t_sierp *)malloc(sizeof(t_sierp));
+	e->c = 0;
 	if (e->mandel)
 		init_mandel(e->m , e);
 	if (e->jul)

@@ -6,11 +6,61 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 11:47:11 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 13:16:23 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double		get_h(int i, t_env *e)
+{
+	if (e->c == 1)
+		return (cos(i % 360) * (i % 360));
+	else if (e->c == 2)
+		return ((i * i) % 360);
+	else if (e->c == 3)
+		return (fmod(M_PI * i, 360));
+	else if (e->c == 4)
+		return (i % 90 + 200);
+	else if (e->c == 5)
+		return (i % 150 + 120);
+	return (i % 360);
+}
+
+int			RGB_Create(double r, double g, double b)
+{
+	t_color	u;
+
+	u.rgb.r = r * 255;
+	u.rgb.g = g * 255;
+	u.rgb.b = b * 255;
+	return (u.color);
+}
+
+int			HSV_to_RGB(int i, t_env *e)
+{
+	double		h;
+	double		x;
+	double		m;
+	int			color;
+
+	h = get_h(i, e);
+	x = (1 - fabs(fmod(h / 60, 2) - 1));
+	m = 1 - 1;
+	if (h >= 0.0 && h < 60.0)
+		color = RGB_Create(1 + m, x + m, m);
+	else if (h >= 60.0 && h < 120.0)
+		color = RGB_Create(x + m, 1 + m, m);
+	else if (h >= 120.0 && h < 180.0)
+		color = RGB_Create(m, 1 + m, x + m);
+	else if (h >= 180.0 && h < 240.0)
+		color = RGB_Create(m, x + m, 1 + m);
+	else if (h >= 240.0 && h < 300.0)
+		color = RGB_Create(x + m, m, 1 + m);
+	else 
+		color = RGB_Create(1 + m, m, x + m);
+	return (color);
+}
 
 static void	draw_color(t_env *e, int i, int x, int y)
 {
@@ -18,7 +68,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	int		p;
 
 	p = x * 4 + y * e->sl;
-	u.color = i * 6;
+	u.color = HSV_to_RGB(i, e);
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
 		e->m->img[p] = u.rgb.b;

@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 17:21:06 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 12:59:24 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct			s_env
 	int					mandel;
 	int					jul;
 	int					sierp;
+	int					c;
 }						t_env;
 
 int		init_env(t_env *e);
@@ -137,4 +138,6 @@ void	sierp(t_env *e, int x, int y, int a, int i);
 void	create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);
+int		RGB_Create(double r, double g, double b);
+int		HSV_to_RGB(int i, t_env *e);
 #endif

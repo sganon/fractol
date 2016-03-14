@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 11:59:28 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 12:08:53 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int		julia_mouse_events(int button, int x, int y, t_env *e)
 	double			x_complex;
 	double			y_complex;
 
+	x_complex = x / e->j->zoom_x + e->j->min_x;
+	y_complex = y / e->j->zoom_y + e->j->min_y;
 	if (button == 1 && x <= WIN_X && y > 30)
 	{
-		x_complex = x / e->j->zoom_x + e->j->min_x;
-		y_complex = y / e->j->zoom_y + e->j->min_y;
 		e->j->min_x = x_complex - k;
 		e->j->min_y = y_complex - k;
 		e->j->max_x = x_complex + k;
@@ -68,7 +68,9 @@ int		mouse_events(int button, int x, int y, t_env *e)
 
 	x_complex = x / e->m->zoom_x + e->m->min_x;
 	y_complex = y / e->m->zoom_y + e->m->min_y;
-	if (button == 1)
+	if (button == 2 || button == WHEEL_DOWN)
+		k /= 0.5;
+	if (button == 1 || button == WHEEL_UP)
 	{
 		e->m->max_x = x_complex + k;
 		e->m->min_x = x_complex - k;
