@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 15:02:26 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 16:13:03 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		expose_hook(t_env *e)
 		create_image(e);
 	if (e->mandel)
 	{
-		ship(e);
+		mandel(e);
 		mlx_put_image_to_window(e->mlx, e->m->win, e->m->img_ptr, 0, 0);
 	}
 	if (e->jul)
@@ -79,7 +79,7 @@ int		main(int argc, char **argv)
 {
 	t_env	*e;
 
-	if (argc <= 1 || argc > 4)
+	if (argc <= 1 || argc > 5)
 		ft_error(0);
 	e = (t_env *)malloc(sizeof(t_env));
 	check_argv(argc, argv, e);

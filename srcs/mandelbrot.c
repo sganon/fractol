@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 14:56:37 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 16:12:37 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			HSV_to_RGB(int i, t_env *e)
 	return (color);
 }
 
-void	draw_color(t_env *e, int i, int x, int y)
+static void	draw_color(t_env *e, int i, int x, int y)
 {
 	t_color	u;
 	int		p;

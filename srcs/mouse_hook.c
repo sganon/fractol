@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 14:59:17 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 16:17:50 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ship_mouse_events(int button, int x, int y, t_env *e)
 	y_complex = y / e->sh->zoom_y + e->sh->min_y;
 	if (button == 2 || button == WHEEL_DOWN)
 		k /= 0.5;
-	if (button == 1 || button == WHEEL_UP)
+	if ((button == 1 || button == WHEEL_UP) && x <= WIN_X && y > 30)
 	{
 		e->sh->max_x = x_complex + k;
 		e->sh->min_x = x_complex - k;
