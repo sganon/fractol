@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 13:16:23 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:04:48 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ double		get_h(int i, t_env *e)
 		return (i % 90 + 200);
 	else if (e->c == 5)
 		return (i % 150 + 120);
+	else if (e->c == 6)
+		return (fmod(exp(i), 360));
 	return (i % 360);
 }
 
@@ -47,7 +49,9 @@ int			HSV_to_RGB(int i, t_env *e)
 	h = get_h(i, e);
 	x = (1 - fabs(fmod(h / 60, 2) - 1));
 	m = 1 - 1;
-	if (h >= 0.0 && h < 60.0)
+	if (h >= 360)
+		color = 0;
+	else if (h >= 0.0 && h < 60.0)
 		color = RGB_Create(1 + m, x + m, m);
 	else if (h >= 60.0 && h < 120.0)
 		color = RGB_Create(x + m, 1 + m, m);
@@ -62,13 +66,16 @@ int			HSV_to_RGB(int i, t_env *e)
 	return (color);
 }
 
-static void	draw_color(t_env *e, int i, int x, int y)
+void	draw_color(t_env *e, int i, int x, int y)
 {
 	t_color	u;
 	int		p;
 
 	p = x * 4 + y * e->sl;
-	u.color = HSV_to_RGB(i, e);
+	if (e->c < 7)
+		u.color = HSV_to_RGB(i, e);
+	else
+		u.color = i * 6;
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
 		e->m->img[p] = u.rgb.b;

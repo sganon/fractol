@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 13:17:12 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:04:05 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		key_events(int keycode, t_env *e)
 	if (keycode == KEY_C)
 	{
 		e->c++;
-		if (e->c > 5)
+		if (e->c > 7)
 			e->c = 0;
 		expose_hook(e);
 	}

@@ -6,13 +6,13 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/12 16:14:22 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:05:35 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	draw_color(t_env *e, int x, int y)
+static void	draw_color_sierp(t_env *e, int x, int y)
 {
 	t_color	u;
 	int		p;
@@ -40,7 +40,7 @@ void	ft_draw_line(t_point p1, t_point p2, t_env *e)
 	err = (d.x > d.y ? d.x : -d.y) / 2;
 	while (42)
 	{
-		draw_color(e, p1.x, p1.y);
+		draw_color_sierp(e, p1.x, p1.y);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		e2 = err;

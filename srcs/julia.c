@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 12:58:30 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/14 14:08:17 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	t_color	u;
 	int		p;
 
-	u.color = HSV_to_RGB(i, e);
 	p = x * 4 + y * e->sl;
+	if (e->c < 7)
+		u.color = HSV_to_RGB(i, e);
+	else
+		u.color = i * 6;
 	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
 	{
 		e->j->img[p] = u.rgb.b;
