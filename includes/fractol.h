@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 14:58:51 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/15 16:16:50 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int		key_events(int keycode, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 int		julia_mouse_events(int button, int x, int y, t_env *e);
 int		ship_mouse_events(int button, int x, int y, t_env *e);
+int		sierp_mouse_events(int button, int x, int y, t_env *e);
 int		move_c(int x, int y, t_env *e);
 int		check_argv(int argc, char **argv, t_env *e);
 void	mandel(t_env *e);

@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 14:40:32 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 14:58:25 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/15 16:29:01 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	ship(t_env *e)
 	double tmp;
 
 	x = 0;
-	while (x < e->img_x)
+	while (x < e->img_x - 1)
 	{
 		y = 0;
-		while (y < e->img_y)
+		while (y < e->img_y - 1)
 		{
 			e->sh->c_r = x / e->sh->zoom_x + e->sh->min_x;
 			e->sh->c_i = y / e->sh->zoom_y + e->sh->min_y;

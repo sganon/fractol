@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 16:13:03 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/15 16:16:20 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		main(int argc, char **argv)
 	{
 		mlx_key_hook(e->s->win, key_events, e);
 		mlx_expose_hook(e->s->win, expose_hook, e);
+		mlx_mouse_hook(e->s->win, sierp_mouse_events, e);
 	}
 	if (e->ship)
 	{

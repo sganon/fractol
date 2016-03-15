@@ -6,11 +6,23 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/14 16:17:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/15 16:33:40 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		sierp_mouse_events(int button, int x, int y, t_env *e)
+{
+	if (button == 1 || button == WHEEL_UP)
+	{
+		e->s->a += 20;
+		e->s->x = x - e->s->a / 2;
+		e->s->y = y;
+	}
+	expose_hook(e);
+	return (1);
+}
 
 int		move_c(int x, int y, t_env *e)
 {
@@ -104,8 +116,8 @@ int		mouse_events(int button, int x, int y, t_env *e)
 		e->m->i_max += 15;
 		k *= 0.5;
 	}
-	e->m->zoom_x = e->img_x / (e->m->max_x - e->m->min_x);
-	e->m->zoom_y = e->img_y / (e->m->max_y - e->m->min_y);
+	e->m->zoom_x = WIN_X / (e->m->max_x - e->m->min_x);
+	e->m->zoom_y = WIN_Y / (e->m->max_y - e->m->min_y);
 	expose_hook(e);
 	return (0);
 }
