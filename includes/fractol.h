@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/16 16:06:41 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/17 17:34:48 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define PLUS			69
 # define KEY_C			8
 # define KEY_I			34
+# define KEY_R			15
 # define STAR			67
 # define SLASH			75
 # define WHEEL_UP		4
@@ -58,35 +59,6 @@ typedef struct			s_point
 	int					x;
 	int					y;
 }						t_point;
-
-typedef struct			s_ship
-{
-	void				*win;
-	double				min_x;
-	double				max_x;
-	double				min_y;
-	double				max_y;
-	double				c_r;
-	double				c_i;
-	double				z_r;
-	double				z_i;
-	double				zoom_x;
-	double				zoom_y;
-	void				*img_ptr;
-	char				*img;
-	int					i_max;
-}						t_ship;
-
-typedef struct			s_sierp
-{
-	void				*win;
-	void				*img_ptr;
-	char				*img;
-	int					x;
-	int					y;
-	int					a;
-	int					i;
-}						t_sierp;
 
 typedef struct			s_man
 {
@@ -124,6 +96,35 @@ typedef struct			s_jul
 	int					i_max;
 }						t_jul;
 
+typedef struct			s_sierp
+{
+	void				*win;
+	void				*img_ptr;
+	char				*img;
+	int					x;
+	int					y;
+	int					a;
+	int					i;
+}						t_sierp;
+
+typedef struct			s_ship
+{
+	void				*win;
+	double				min_x;
+	double				max_x;
+	double				min_y;
+	double				max_y;
+	double				c_r;
+	double				c_i;
+	double				z_r;
+	double				z_i;
+	double				zoom_x;
+	double				zoom_y;
+	void				*img_ptr;
+	char				*img;
+	int					i_max;
+}						t_ship;
+
 typedef struct			s_env
 {
 	void				*mlx;
@@ -145,8 +146,14 @@ typedef struct			s_env
 }						t_env;
 
 int		init_env(t_env *e);
-int		key_events(int keycode, t_env *e);
+int		init_mandel(t_man *m, t_env *e);
+int		init_julia(t_jul *j, t_env *e);
+int		init_ship(t_ship *sh, t_env *e);
+int		init_sierp(t_sierp *s);
+int		sierp_key_events(int keycode, t_env *e);
 int		mandel_key_events(int key, t_env *e);
+int		julia_key_events(int key, t_env *e);
+int		ship_key_events(int key, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 int		julia_mouse_events(int button, int x, int y, t_env *e);
 int		ship_mouse_events(int button, int x, int y, t_env *e);
@@ -157,9 +164,11 @@ void	mandel(t_env *e);
 void	julia(t_env *e);
 void	sierp(t_env *e, int x, int y, int a, int i);
 void	ship(t_env *e);
+void	handle_color(t_env *e);
 int		create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);
 int		RGB_Create(double r, double g, double b);
 int		HSV_to_RGB(int i, t_env *e);
+int		check_for_x_y(int x, int y, t_env *e);
 #endif

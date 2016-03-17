@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/16 15:50:23 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/17 17:34:50 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ static void	draw_color_sierp(t_env *e, int x, int y)
 	t_color	u;
 	int		p;
 
-	u.color = y * 80;
+	if (e->c < 7)
+		u.color = HSV_to_RGB(x, e);
+	else
+		u.color = x * 7;
 	p = x * 4 + y * e->sl;
-	if (y > 0 && y < WIN_Y && x > 0 && x < WIN_X && p < WIN_X * WIN_Y * e->bpp)
+	check_for_x_y(x, y, e);
+	if (check_for_x_y(x, y, e))
 	{
 			e->s->img[p] = u.rgb.b;
 			e->s->img[p + 1] = u.rgb.g;
