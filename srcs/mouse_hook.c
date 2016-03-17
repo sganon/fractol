@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/15 16:33:40 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/16 15:26:44 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		sierp_mouse_events(int button, int x, int y, t_env *e)
 	{
 		e->s->a += 20;
 		e->s->x = x - e->s->a / 2;
-		e->s->y = y;
+		e->s->y = y + (e->s->a * sqrt(3) / 2) / y;
 	}
 	expose_hook(e);
 	return (1);

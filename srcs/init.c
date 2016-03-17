@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/15 15:30:04 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/16 15:45:02 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,22 @@ int		init_sierp(t_sierp *s, t_env *e)
 	return (1);
 }
 
-void	create_image(t_env *e)
+int		create_image(t_env *e)
 {
 	e->end = 0;
 	e->bpp = 8;
 	e->sl = WIN_X;
 	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->j->img = mlx_get_data_addr(e->j->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->s->img = mlx_get_data_addr(e->s->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->sh->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	if (!e->m->img_ptr || !e->j->img_ptr || !e->s->img_ptr || !e->sh->img_ptr)
+		return (0);
+	e->m->img = mlx_get_data_addr(e->m->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->j->img = mlx_get_data_addr(e->j->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	e->s->img = mlx_get_data_addr(e->s->img_ptr, &(e->bpp), &(e->sl), &(e->end));
 	e->sh->img = mlx_get_data_addr(e->sh->img_ptr, &(e->bpp), &(e->sl), &(e->end));
+	return (1);
 }
 
 int		init_env(t_env *e)

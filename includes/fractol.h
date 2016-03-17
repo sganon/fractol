@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/15 16:16:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/16 16:06:41 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct			s_env
 
 int		init_env(t_env *e);
 int		key_events(int keycode, t_env *e);
+int		mandel_key_events(int key, t_env *e);
 int		mouse_events(int button, int x, int y, t_env *e);
 int		julia_mouse_events(int button, int x, int y, t_env *e);
 int		ship_mouse_events(int button, int x, int y, t_env *e);
@@ -156,7 +157,7 @@ void	mandel(t_env *e);
 void	julia(t_env *e);
 void	sierp(t_env *e, int x, int y, int a, int i);
 void	ship(t_env *e);
-void	create_image(t_env *e);
+int		create_image(t_env *e);
 int		expose_hook(t_env *e);
 void	ft_error(int error);
 int		RGB_Create(double r, double g, double b);
