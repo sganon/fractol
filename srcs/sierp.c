@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:34:50 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/17 18:13:04 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	draw_color_sierp(t_env *e, int x, int y)
 	else
 		u.color = x * 7;
 	p = x * 4 + y * e->sl;
-	check_for_x_y(x, y, e);
 	if (check_for_x_y(x, y, e))
 	{
 			e->s->img[p] = u.rgb.b;
