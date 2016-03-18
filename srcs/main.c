@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 16:42:00 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 17:26:24 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		expose_hook(t_env *e)
 	}
 	if (e->sierp)
 	{
-		sierp(e, e->s->x, e->s->y, e->s->i);
+		sierp(e, e->s->x, e->s->y, e->s->a, e->s->i);
 		mlx_put_image_to_window(e->mlx, e->s->win, e->s->img_ptr, 0, 0);
 	}
 	if (e->ship)

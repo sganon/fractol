@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 16:42:00 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 17:26:24 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int						move_c(int x, int y, t_env *e);
 int						check_argv(int argc, char **argv, t_env *e);
 void					mandel(t_env *e);
 void					julia(t_env *e);
-void					sierp(t_env *e, int x, int y, int i);
+void					sierp(t_env *e, int x, int y, int a, int i);
 void					ship(t_env *e);
 void					handle_color(t_env *e);
 int						create_image(t_env *e);

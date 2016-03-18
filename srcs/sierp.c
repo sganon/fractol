@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 16:46:18 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 17:33:09 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,17 @@ void	cut_triangle(int x, int y, int a, t_env *e)
 	ft_draw_line(B, C, e);
 }
 
-void	sierp(t_env *e, int x, int y, int i)
+void	sierp(t_env *e, int x, int y, int a, int i)
 {
 	double	b;
-	int		tmp;
 
-	b = -(e->s->a) * sqrt(3) / 2;
-	tmp = e->s->a;
+	b = -a * sqrt(3) / 2;
 	if (i > 0)
 	{
-		triangle(x, y, e->s->a, e);
-		cut_triangle(x, y, e->s->a, e);
-		e->s->a /= 2;
-		sierp(e, x, y, i - 1);
-		e->s->a = tmp;
-		e->s->a/= 2;
-		sierp(e, x + e->s->a / 2, y, i - 1);
-		e->s->a = tmp;
-		e->s->a/= 2;
-		sierp(e, x + e->s->a / 4, y + b / 2, i - 1);
+		triangle(x, y, a, e);
+		cut_triangle(x, y, a, e);
+		sierp(e, x, y, a / 2, i - 1);
+		sierp(e, x + a / 2, y, a / 2,  i - 1);
+		sierp(e, x + a / 4, y + b / 2, a / 2, i - 1);
 	}
 }
