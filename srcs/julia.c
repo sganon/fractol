@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:38:33 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 12:47:25 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	handle_pos(int key, t_jul *ptr)
 	}
 }
 
-int		julia_key_events(int key, t_env *e)
+int			julia_key_events(int key, t_env *e)
 {
 	if (key == ESC)
 		exit(0);
@@ -62,7 +62,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 
 	p = x * 4 + y * e->sl;
 	if (e->c < 7)
-		u.color = HSV_to_RGB(i, e);
+		u.color = hsv_to_rgb(i, e);
 	else
 		u.color = i * 6;
 	if (check_for_x_y(x, y, e))
@@ -73,33 +73,31 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	}
 }
 
-void	julia(t_env *e)
+void		julia(t_env *e)
 {
 	int		x;
 	int		y;
 	int		i;
-	double tmp;
+	double	tmp;
 
-	x = 0;
-	while (x < e->img_x)
+	x = -1;
+	while (++x < e->img_x)
 	{
-		y = 0;
-		while (y < e->img_y)
+		y = -1;
+		while (++y < e->img_y)
 		{
 			e->j->z_r = x / e->j->zoom_x + e->j->min_x;
 			e->j->z_i = y / e->j->zoom_y + e->j->min_y;
 			i = 0;
-			while (e->j->z_r * e->j->z_r + e->j->z_i * e->j->z_i <= 4 && i < e->j->i_max)
+			while (pow(e->j->z_r, 2) + pow(e->j->z_i, 2) <= 4 && i < EJ(i_max))
 			{
 				tmp = e->j->z_r;
-				e->j->z_r = e->j->z_r * e->j->z_r - e->j->z_i * e->j->z_i + e->j->c_r;
+				e->j->z_r = pow(e->j->z_r, 2) - pow(e->j->z_i, 2) + e->j->c_r;
 				e->j->z_i = 2 * e->j->z_i * tmp + e->j->c_i;
 				i++;
 			}
 			if (i != e->j->i_max)
 				draw_color(e, i, x, y);
-			y++;
 		}
-		x++;
 	}
 }

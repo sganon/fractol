@@ -6,7 +6,7 @@
 #    By: sganon <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/23 12:32:31 by sganon            #+#    #+#              #
-#    Updated: 2016/03/17 16:27:05 by sganon           ###   ########.fr        #
+#    Updated: 2016/03/18 11:49:32 by sganon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRC =	main.c \
 		mandelbrot.c \
 		julia.c \
 		error.c \
-		arguments.c \
 		sierp.c \
 		ship.c \
 

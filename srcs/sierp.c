@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 18:13:04 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 16:46:18 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void	draw_color_sierp(t_env *e, int x, int y)
 	int		p;
 
 	if (e->c < 7)
-		u.color = HSV_to_RGB(x, e);
+		u.color = hsv_to_rgb(x, e);
 	else
 		u.color = x * 7;
 	p = x * 4 + y * e->sl;
-	if (check_for_x_y(x, y, e))
+	if (check_for_x_y(x, y, e) && !e->s->img[p])
 	{
 			e->s->img[p] = u.rgb.b;
 			e->s->img[p + 1] = u.rgb.g;
@@ -57,12 +57,14 @@ void	ft_draw_line(t_point p1, t_point p2, t_env *e)
 	}
 }
 
-void	triangle(int x, int y, int a, int b, t_env *e)
+void	triangle(int x, int y, int a, t_env *e)
 {
 	t_point	A;
 	t_point	B;
 	t_point	C;
+	int		b;
 
+	b = -a * sqrt(3) / 2;
 	A.x = x;
 	A.y = y;
 	B.x = x + a;
@@ -75,12 +77,14 @@ void	triangle(int x, int y, int a, int b, t_env *e)
 	ft_draw_line(C, B, e);
 }
 
-void	cut_triangle(int x, int y, int a, int b, t_env *e)
+void	cut_triangle(int x, int y, int a, t_env *e)
 {
 	t_point	A;
 	t_point	B;
 	t_point	C;
+	int		b;
 
+	b = -a * sqrt(3) / 2;
 	A.x = x + a / 2;
 	A.y = y;
 	B.x = x + 3 * a / 4;
@@ -93,17 +97,24 @@ void	cut_triangle(int x, int y, int a, int b, t_env *e)
 	ft_draw_line(B, C, e);
 }
 
-void	sierp(t_env *e, int x, int y, int a, int i)
+void	sierp(t_env *e, int x, int y, int i)
 {
 	double	b;
+	int		tmp;
 
-	b = -a * sqrt(3) / 2;
+	b = -(e->s->a) * sqrt(3) / 2;
+	tmp = e->s->a;
 	if (i > 0)
 	{
-		triangle(x, y, a, b, e);
-		cut_triangle(x, y, a, b, e);
-		sierp(e ,x, y, a / 2, i - 1);
-		sierp(e ,x + a / 2, y, a / 2, i - 1);
-		sierp(e ,x + a / 4, y + b / 2, a / 2, i - 1);
+		triangle(x, y, e->s->a, e);
+		cut_triangle(x, y, e->s->a, e);
+		e->s->a /= 2;
+		sierp(e, x, y, i - 1);
+		e->s->a = tmp;
+		e->s->a/= 2;
+		sierp(e, x + e->s->a / 2, y, i - 1);
+		e->s->a = tmp;
+		e->s->a/= 2;
+		sierp(e, x + e->s->a / 4, y + b / 2, i - 1);
 	}
 }

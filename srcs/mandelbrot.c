@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 18:00:16 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 12:53:13 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ double		get_h(int i, t_env *e)
 	return (i % 360);
 }
 
-int			RGB_Create(double r, double g, double b)
+int			rgb_create(double r, double g, double b)
 {
 	t_color	u;
 
@@ -39,7 +39,7 @@ int			RGB_Create(double r, double g, double b)
 	return (u.color);
 }
 
-int			HSV_to_RGB(int i, t_env *e)
+int			hsv_to_rgb(int i, t_env *e)
 {
 	double		h;
 	double		x;
@@ -52,17 +52,17 @@ int			HSV_to_RGB(int i, t_env *e)
 	if (h >= 360)
 		color = 0;
 	else if (h >= 0.0 && h < 60.0)
-		color = RGB_Create(1 + m, x + m, m);
+		color = rgb_create(1 + m, x + m, m);
 	else if (h >= 60.0 && h < 120.0)
-		color = RGB_Create(x + m, 1 + m, m);
+		color = rgb_create(x + m, 1 + m, m);
 	else if (h >= 120.0 && h < 180.0)
-		color = RGB_Create(m, 1 + m, x + m);
+		color = rgb_create(m, 1 + m, x + m);
 	else if (h >= 180.0 && h < 240.0)
-		color = RGB_Create(m, x + m, 1 + m);
+		color = rgb_create(m, x + m, 1 + m);
 	else if (h >= 240.0 && h < 300.0)
-		color = RGB_Create(x + m, m, 1 + m);
-	else 
-		color = RGB_Create(1 + m, m, x + m);
+		color = rgb_create(x + m, m, 1 + m);
+	else
+		color = rgb_create(1 + m, m, x + m);
 	return (color);
 }
 
@@ -73,7 +73,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 
 	p = x * 4 + y * e->sl;
 	if (e->c < 7)
-		u.color = HSV_to_RGB(i, e);
+		u.color = hsv_to_rgb(i, e);
 	else
 		u.color = i * 6;
 	if (check_for_x_y(x, y, e))
@@ -84,35 +84,30 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	}
 }
 
-void	mandel(t_env *e)
+void		mandel(t_env *e)
 {
 	int		x;
 	int		y;
 	int		i;
-	double tmp;
+	double	tmp;
 
-	x = 0;
-	while (x < e->img_x)
+	x = -1;
+	while (++x < e->img_x)
 	{
-		y = 0;
-		while (y < e->img_y)
+		y = -1;
+		while (++y < e->img_y)
 		{
-			e->m->c_r = x / e->m->zoom_x + e->m->min_x;
-			e->m->c_i = y / e->m->zoom_y + e->m->min_y;
-			e->m->z_r = 0;
-			e->m->z_i = 0;
+			get_c_and_z(e, x, y);
 			i = 0;
-			while (e->m->z_r * e->m->z_r + e->m->z_i * e->m->z_i <= 4 && i < e->m->i_max)
+			while (pow(e->m->z_r, 2) + pow(e->m->z_i, 2) <= 4 && i < EM(i_max))
 			{
 				tmp = e->m->z_r;
-				e->m->z_r = e->m->z_r * e->m->z_r - e->m->z_i * e->m->z_i + e->m->c_r;
+				e->m->z_r = pow(e->m->z_r, 2) - pow(e->m->z_i, 2) + e->m->c_r;
 				e->m->z_i = 2 * e->m->z_i * tmp + e->m->c_i;
 				i++;
 			}
 			if (i != e->m->i_max)
 				draw_color(e, i, x, y);
-			y++;
 		}
-		x++;
 	}
 }

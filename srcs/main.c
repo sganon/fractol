@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:39:05 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:18:40 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 16:42:00 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ void	ft_clean(t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	if (e->m->img == NULL || e->j->img == NULL || e->s->img == NULL || e->sh == NULL)
-	{
-		if (create_image(e) == 0)
-			return (0);
-	}
+	if (e->m->img == NULL || e->j->img == NULL || e->s->img == NULL || e->sh->img == NULL)
+		create_image(e);
 	if (e->mandel)
 	{
 		mandel(e);
@@ -63,7 +60,7 @@ int		expose_hook(t_env *e)
 	}
 	if (e->sierp)
 	{
-		sierp(e, e->s->x, e->s->y, e->s->a, e->s->i);
+		sierp(e, e->s->x, e->s->y, e->s->i);
 		mlx_put_image_to_window(e->mlx, e->s->win, e->s->img_ptr, 0, 0);
 	}
 	if (e->ship)
@@ -85,7 +82,8 @@ int		main(int argc, char **argv)
 	if (argc <= 1 || argc > 5)
 		ft_error(0);
 	e = (t_env *)malloc(sizeof(t_env));
-	check_argv(argc, argv, e);
+	if (!(check_argv(argc, argv, e)))
+		ft_error(1);
 	if (!(init_env(e)))
 		return (0);
 	if (e->mandel)

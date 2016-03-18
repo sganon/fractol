@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 14:40:32 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:36:20 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 13:03:49 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	handle_pos(int key, t_ship *ptr)
 	}
 }
 
-int		ship_key_events(int key, t_env *e)
+int			ship_key_events(int key, t_env *e)
 {
 	if (key == ESC)
 		exit(0);
@@ -55,7 +55,6 @@ int		ship_key_events(int key, t_env *e)
 	return (1);
 }
 
-
 static void	draw_color(t_env *e, int i, int x, int y)
 {
 	t_color	u;
@@ -63,7 +62,7 @@ static void	draw_color(t_env *e, int i, int x, int y)
 
 	p = x * 4 + y * e->sl;
 	if (e->c < 7)
-		u.color = HSV_to_RGB(i, e);
+		u.color = hsv_to_rgb(i, e);
 	else
 		u.color = i * 6;
 	if (check_for_x_y(x, y, e))
@@ -74,35 +73,48 @@ static void	draw_color(t_env *e, int i, int x, int y)
 	}
 }
 
-void	ship(t_env *e)
+void		get_c_and_z(t_env *e, int x, int y)
+{
+	if (e->mandel)
+	{
+		e->m->c_r = x / e->m->zoom_x + e->m->min_x;
+		e->m->c_i = y / e->m->zoom_y + e->m->min_y;
+		e->m->z_r = 0;
+		e->m->z_i = 0;
+	}
+	if (e->ship)
+	{
+		e->sh->c_r = x / e->sh->zoom_x + e->sh->min_x;
+		e->sh->c_i = y / e->sh->zoom_y + e->sh->min_y;
+		e->sh->z_r = 0;
+		e->sh->z_i = 0;
+	}
+}
+
+void		ship(t_env *e)
 {
 	int		x;
 	int		y;
 	int		i;
-	double tmp;
+	double	tmp;
 
-	x = 0;
-	while (x < e->img_x - 1)
+	x = -1;
+	while (++x < e->img_x - 1)
 	{
-		y = 0;
-		while (y < e->img_y - 1)
+		y = -1;
+		while (++y < e->img_y - 1)
 		{
-			e->sh->c_r = x / e->sh->zoom_x + e->sh->min_x;
-			e->sh->c_i = y / e->sh->zoom_y + e->sh->min_y;
-			e->sh->z_r = 0;
-			e->sh->z_i = 0;
+			get_c_and_z(e, x, y);
 			i = 0;
-			while (e->sh->z_r * e->sh->z_r + e->sh->z_i * e->sh->z_i <= 4 && i <= e->sh->i_max)
+			while (pow(ESH(z_r), 2) + pow(ESH(z_i), 2) <= 4 && i <= ESH(i_max))
 			{
 				tmp = e->sh->z_r;
-				e->sh->z_r = ABS(e->sh->z_r * e->sh->z_r - e->sh->z_i * e->sh->z_i) + e->sh->c_r;
+				ESH(z_r) = ABS(pow(ESH(z_r), 2) - pow(ESH(z_i), 2)) + ESH(c_r);
 				e->sh->z_i = ABS(2 * e->sh->z_i * tmp) + e->sh->c_i;
 				i++;
 			}
 			if (i != e->sh->i_max + 1)
 				draw_color(e, i, x, y);
-			y++;
 		}
-		x++;
 	}
 }

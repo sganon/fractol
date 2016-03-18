@@ -6,17 +6,17 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:28:02 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 12:12:49 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 void	handle_color(t_env *e)
-{	
-		e->c++;
-		if (e->c > 7)
-			e->c = 0;
+{
+	e->c++;
+	if (e->c > 7)
+		e->c = 0;
 }
 
 void	handle_pos(int key, t_man *ptr)
@@ -86,7 +86,6 @@ void	handle_sierp_pos(int key, t_sierp *ptr)
 	}
 }
 
-
 int		sierp_key_events(int key, t_env *e)
 {
 	if (key == ESC)
@@ -98,7 +97,7 @@ int		sierp_key_events(int key, t_env *e)
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
 		handle_sierp_pos(key, e->s);
 	if (key == KEY_R)
-		init_sierp(e->s);
+		init_sierp(e->s, e);
 	expose_hook(e);
 	return (0);
 }

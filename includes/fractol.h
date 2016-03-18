@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/17 17:34:48 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 16:42:00 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@
 # define WHEEL_UP		4
 # define WHEEL_DOWN		5
 
-# define WIN_X		900
-# define WIN_Y		900
+# define WIN_X			900
+# define WIN_Y			900
 
 # define EM(x)			e->m->x
 # define EJ(x)			e->j->x
+# define ES(x)			e->s->x
+# define ESH(x)			e->sh->x
 
 # define ABS(x)			((x) < 0 ? -(x) : (x))
 
@@ -145,30 +147,31 @@ typedef struct			s_env
 	int					c;
 }						t_env;
 
-int		init_env(t_env *e);
-int		init_mandel(t_man *m, t_env *e);
-int		init_julia(t_jul *j, t_env *e);
-int		init_ship(t_ship *sh, t_env *e);
-int		init_sierp(t_sierp *s);
-int		sierp_key_events(int keycode, t_env *e);
-int		mandel_key_events(int key, t_env *e);
-int		julia_key_events(int key, t_env *e);
-int		ship_key_events(int key, t_env *e);
-int		mouse_events(int button, int x, int y, t_env *e);
-int		julia_mouse_events(int button, int x, int y, t_env *e);
-int		ship_mouse_events(int button, int x, int y, t_env *e);
-int		sierp_mouse_events(int button, int x, int y, t_env *e);
-int		move_c(int x, int y, t_env *e);
-int		check_argv(int argc, char **argv, t_env *e);
-void	mandel(t_env *e);
-void	julia(t_env *e);
-void	sierp(t_env *e, int x, int y, int a, int i);
-void	ship(t_env *e);
-void	handle_color(t_env *e);
-int		create_image(t_env *e);
-int		expose_hook(t_env *e);
-void	ft_error(int error);
-int		RGB_Create(double r, double g, double b);
-int		HSV_to_RGB(int i, t_env *e);
-int		check_for_x_y(int x, int y, t_env *e);
+int						init_env(t_env *e);
+int						init_mandel(t_man *m, t_env *e);
+int						init_julia(t_jul *j, t_env *e);
+int						init_ship(t_ship *sh, t_env *e);
+int						init_sierp(t_sierp *s, t_env *e);
+int						sierp_key_events(int keycode, t_env *e);
+int						mandel_key_events(int key, t_env *e);
+int						julia_key_events(int key, t_env *e);
+int						ship_key_events(int key, t_env *e);
+int						mouse_events(int button, int x, int y, t_env *e);
+int						julia_mouse_events(int button, int x, int y, t_env *e);
+int						ship_mouse_events(int button, int x, int y, t_env *e);
+int						sierp_mouse_events(int button, int x, int y, t_env *e);
+int						move_c(int x, int y, t_env *e);
+int						check_argv(int argc, char **argv, t_env *e);
+void					mandel(t_env *e);
+void					julia(t_env *e);
+void					sierp(t_env *e, int x, int y, int i);
+void					ship(t_env *e);
+void					handle_color(t_env *e);
+int						create_image(t_env *e);
+int						expose_hook(t_env *e);
+void					ft_error(int error);
+int						rgb_create(double r, double g, double b);
+int						hsv_to_rgb(int i, t_env *e);
+int						check_for_x_y(int x, int y, t_env *e);
+void					get_c_and_z(t_env *e, int x, int y);
 #endif
