@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 17:26:46 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 18:28:06 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,10 @@ int		init_sierp(t_sierp *s, t_env *e)
 	s->y = WIN_Y - 100;
 	s->a = 800;
 	s->i = 3;
+	s->p.x = s->x;
+	s->p.y = s->y;
 	s->img_ptr = NULL;
 	s->img = NULL;
-	return (1);
-}
-
-int		create_image(t_env *e)
-{
-	e->end = 0;
-	e->bpp = 8;
-	e->sl = WIN_X;
-	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->sh->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	if (!e->m->img_ptr || !e->j->img_ptr || !e->s->img_ptr || !e->sh->img_ptr)
-		ft_error(-1);
-	EM(img) = mlx_get_data_addr(EM(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	EJ(img) = mlx_get_data_addr(EJ(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	ES(img) = mlx_get_data_addr(ES(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	ESH(img) = mlx_get_data_addr(ESH(img_ptr), &(e->bpp), &(e->sl), &(e->end));
 	return (1);
 }
 

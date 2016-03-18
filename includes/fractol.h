@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 17:26:24 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 18:30:40 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct			s_sierp
 	int					y;
 	int					a;
 	int					i;
+	t_point				p;
 }						t_sierp;
 
 typedef struct			s_ship
@@ -164,7 +165,7 @@ int						move_c(int x, int y, t_env *e);
 int						check_argv(int argc, char **argv, t_env *e);
 void					mandel(t_env *e);
 void					julia(t_env *e);
-void					sierp(t_env *e, int x, int y, int a, int i);
+void					sierp(t_env *e, t_point p, int a, int i);
 void					ship(t_env *e);
 void					handle_color(t_env *e);
 int						create_image(t_env *e);
@@ -174,4 +175,7 @@ int						rgb_create(double r, double g, double b);
 int						hsv_to_rgb(int i, t_env *e);
 int						check_for_x_y(int x, int y, t_env *e);
 void					get_c_and_z(t_env *e, int x, int y);
+void					ft_draw_line(t_point p1, t_point p2, t_env *e);
+void					draw_color_sierp(t_env *e, int x, int y);
+void					handle_fractal(t_env *e);
 #endif

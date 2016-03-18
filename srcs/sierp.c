@@ -6,13 +6,13 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:02:44 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 17:33:09 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/18 17:59:21 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	draw_color_sierp(t_env *e, int x, int y)
+void		draw_color_sierp(t_env *e, int x, int y)
 {
 	t_color	u;
 	int		p;
@@ -24,90 +24,79 @@ static void	draw_color_sierp(t_env *e, int x, int y)
 	p = x * 4 + y * e->sl;
 	if (check_for_x_y(x, y, e) && !e->s->img[p])
 	{
-			e->s->img[p] = u.rgb.b;
-			e->s->img[p + 1] = u.rgb.g;
-			e->s->img[p + 2] = u.rgb.r;
+		e->s->img[p] = u.rgb.b;
+		e->s->img[p + 1] = u.rgb.g;
+		e->s->img[p + 2] = u.rgb.r;
 	}
 }
-void	ft_draw_line(t_point p1, t_point p2, t_env *e)
-{
-	t_point		d;
-	t_point		s;
-	int			err;
-	int			e2;
 
-	d.x = ABS(p2.x - p1.x);
-	d.y = ABS(p2.y - p1.y);
-	s.x = p1.x < p2.x ? 1 : -1;
-	s.y = p1.y < p2.y ? 1 : -1;
-	err = (d.x > d.y ? d.x : -d.y) / 2;
-	while (42)
+void		triangle(int x, int y, int a, t_env *e)
+{
+	t_point	c;
+	t_point	d;
+	t_point	f;
+	int		b;
+
+	b = -a * sqrt(3) / 2;
+	c.x = x;
+	c.y = y;
+	d.x = x + a;
+	d.y = y;
+	f.x = x + a / 2;
+	f.y = y + b;
+	ft_draw_line(c, d, e);
+	ft_draw_line(c, f, e);
+	ft_draw_line(f, d, e);
+}
+
+void		cut_triangle(int x, int y, int a, t_env *e)
+{
+	t_point	c;
+	t_point	d;
+	t_point	f;
+	int		b;
+
+	b = -a * sqrt(3) / 2;
+	c.x = x + a / 2;
+	c.y = y;
+	d.x = x + 3 * a / 4;
+	d.y = y + b / 2;
+	f.x = x + a / 4;
+	f.y = y + b / 2;
+	ft_draw_line(c, d, e);
+	ft_draw_line(c, f, e);
+	ft_draw_line(d, f, e);
+}
+
+t_point		new_p(t_point p, int a, int b, int id)
+{
+	if (id == 1)
+		return (p);
+	if (id == 2)
 	{
-		draw_color_sierp(e, p1.x, p1.y);
-		if (p1.x == p2.x && p1.y == p2.y)
-			break ;
-		e2 = err;
-		if (e2 > -d.x && ((err -= d.y) || !err))
-			p1.x += s.x;
-		if (e2 < d.y)
-		{
-			err += d.x;
-			p1.y += s.y;
-		}
+		p.x = p.x + a / 2;
+		return (p);
 	}
+	if (id == 3)
+	{
+		p.x = p.x + a / 4;
+		p.y = p.y + b / 2;
+		return (p);
+	}
+	return (p);
 }
 
-void	triangle(int x, int y, int a, t_env *e)
-{
-	t_point	A;
-	t_point	B;
-	t_point	C;
-	int		b;
-
-	b = -a * sqrt(3) / 2;
-	A.x = x;
-	A.y = y;
-	B.x = x + a;
-	B.y = y;
-	C.x = x + a / 2;
-	C.y = y + b;
-
-	ft_draw_line(A, B, e);
-	ft_draw_line(A, C, e);
-	ft_draw_line(C, B, e);
-}
-
-void	cut_triangle(int x, int y, int a, t_env *e)
-{
-	t_point	A;
-	t_point	B;
-	t_point	C;
-	int		b;
-
-	b = -a * sqrt(3) / 2;
-	A.x = x + a / 2;
-	A.y = y;
-	B.x = x + 3 * a / 4;
-	B.y = y + b / 2;
-	C.x = x + a / 4;
-	C.y = y + b / 2;	
-
-	ft_draw_line(A, B, e);
-	ft_draw_line(A, C, e);
-	ft_draw_line(B, C, e);
-}
-
-void	sierp(t_env *e, int x, int y, int a, int i)
+void		sierp(t_env *e, t_point p, int a, int i)
 {
 	double	b;
 
 	b = -a * sqrt(3) / 2;
 	if (i > 0)
 	{
-		triangle(x, y, a, e);
-		cut_triangle(x, y, a, e);
-		sierp(e, x, y, a / 2, i - 1);
-		sierp(e, x + a / 2, y, a / 2,  i - 1);
-		sierp(e, x + a / 4, y + b / 2, a / 2, i - 1);
+		triangle(p.x, p.y, a, e);
+		cut_triangle(p.x, p.y, a, e);
+		sierp(e, new_p(p, a, b, 1), a / 2, i - 1);
+		sierp(e, new_p(p, a, b, 2), a / 2, i - 1);
+		sierp(e, new_p(p, a, b, 3), a / 2, i - 1);
 	}
 }
