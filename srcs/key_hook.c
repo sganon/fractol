@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 18:32:14 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:07:44 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int		mandel_key_events(int key, t_env *e)
 		handle_pos(key, e->m);
 	if (key == KEY_R)
 		init_mandel(e->m, e);
+	if (key == KEY_H)
+		e->help = !e->help ? 1 : 0;
 	expose_hook(e);
 	return (1);
 }
@@ -98,6 +100,8 @@ int		sierp_key_events(int key, t_env *e)
 		handle_sierp_pos(key, e->s);
 	if (key == KEY_R)
 		init_sierp(e->s, e);
+	if (key == KEY_H)
+		e->help = !e->help ? 1 : 0;
 	expose_hook(e);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 17:49:19 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 18:30:02 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:32:17 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	ft_clean(t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	if (!e->m->img || !e->j->img || !e->s->img || !e->sh->img)
-		create_image(e);
+	create_image(e);
 	if (e->mandel)
 	{
 		mandel(e);
@@ -50,6 +49,7 @@ int		expose_hook(t_env *e)
 		ship(e);
 		mlx_put_image_to_window(e->mlx, e->sh->win, e->sh->img_ptr, 0, 0);
 	}
+	handle_win_help(e);
 	ft_clean(e);
 	mlx_do_sync(e->mlx);
 	return (0);
@@ -111,18 +111,22 @@ void	ft_draw_line(t_point p1, t_point p2, t_env *e)
 
 int		create_image(t_env *e)
 {
-	e->end = 0;
-	e->bpp = 8;
-	e->sl = WIN_X;
-	e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	e->sh->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
-	if (!e->m->img_ptr || !e->j->img_ptr || !e->s->img_ptr || !e->sh->img_ptr)
-		ft_error(-1);
-	EM(img) = mlx_get_data_addr(EM(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	EJ(img) = mlx_get_data_addr(EJ(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	ES(img) = mlx_get_data_addr(ES(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	ESH(img) = mlx_get_data_addr(ESH(img_ptr), &(e->bpp), &(e->sl), &(e->end));
-	return (1);
+	if (!e->m->img || !e->j->img || !e->s->img || !e->sh->img)
+	{
+		e->end = 0;
+		e->bpp = 8;
+		e->sl = WIN_X;
+		e->m->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+		e->j->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+		e->s->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+		e->sh->img_ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+		if (!EM(img_ptr) || !EJ(img_ptr) || !ES(img_ptr) || !ESH(img_ptr))
+			ft_error(-1);
+		EM(img) = IMG_ADDR(EM(img_ptr), &(e->bpp), &(e->sl), &(e->end));
+		EJ(img) = IMG_ADDR(EJ(img_ptr), &(e->bpp), &(e->sl), &(e->end));
+		ES(img) = IMG_ADDR(ES(img_ptr), &(e->bpp), &(e->sl), &(e->end));
+		ESH(img) = IMG_ADDR(ESH(img_ptr), &(e->bpp), &(e->sl), &(e->end));
+		return (1);
+	}
+	return (0);
 }

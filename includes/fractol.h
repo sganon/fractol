@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 18:30:40 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:31:34 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define KEY_C			8
 # define KEY_I			34
 # define KEY_R			15
+# define KEY_H			4
 # define STAR			67
 # define SLASH			75
 # define WHEEL_UP		4
@@ -38,6 +39,7 @@
 # define EJ(x)			e->j->x
 # define ES(x)			e->s->x
 # define ESH(x)			e->sh->x
+# define IMG_ADDR(x, y, z, a)	mlx_get_data_addr(x, y, z, a)
 
 # define ABS(x)			((x) < 0 ? -(x) : (x))
 
@@ -146,6 +148,7 @@ typedef struct			s_env
 	int					sierp;
 	int					ship;
 	int					c;
+	int					help;
 }						t_env;
 
 int						init_env(t_env *e);
@@ -178,4 +181,5 @@ void					get_c_and_z(t_env *e, int x, int y);
 void					ft_draw_line(t_point p1, t_point p2, t_env *e);
 void					draw_color_sierp(t_env *e, int x, int y);
 void					handle_fractal(t_env *e);
+void					handle_win_help(t_env *e);
 #endif

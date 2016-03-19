@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:48:08 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 19:02:11 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 15:47:54 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int		sierp_mouse_events(int button, int x, int y, t_env *e)
 {
+	(void)y;
 	if (button == 1 || button == WHEEL_UP)
 	{
+		e->s->p.x = e->s->p.x - ABS(x - WIN_X / 2);
+		//e->s->p.y = e->s->p.y + ABS(y - WIN_Y / 2);
 		e->s->a += 20;
-		e->s->p.x = ABS(x - e->s->p.x) - 400;
-		e->s->p.y = ABS(y - e->s->p.y) - 100;
 	}
 	expose_hook(e);
 	return (1);

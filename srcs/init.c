@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:04:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 18:28:06 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 13:55:35 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int		init_env(t_env *e)
 	if (!e->sh || !e->m || !e->j || !e->s)
 		return (0);
 	e->c = 0;
+	e->help = 1;
 	if (e->mandel && init_mandel(e->m, e) == 0)
 		return (0);
 	if (e->jul && init_julia(e->j, e) == 0)

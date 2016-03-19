@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 14:40:32 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 13:03:49 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:07:44 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int			ship_key_events(int key, t_env *e)
 		handle_pos(key, e->sh);
 	if (key == KEY_R)
 		init_ship(e->sh, e);
+	if (key == KEY_H)
+		e->help = !e->help ? 1 : 0;
 	expose_hook(e);
 	return (1);
 }

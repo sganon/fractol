@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:27:52 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/18 12:47:25 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:07:31 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int			julia_key_events(int key, t_env *e)
 		handle_pos(key, e->j);
 	if (key == KEY_R)
 		init_julia(e->j, e);
+	if (key == KEY_H)
+		e->help = !e->help ? 1 : 0;
 	expose_hook(e);
 	return (1);
 }
