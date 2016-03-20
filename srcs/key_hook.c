@@ -6,7 +6,7 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:13:15 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/19 14:07:44 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/20 15:57:41 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,11 @@ int		sierp_key_events(int key, t_env *e)
 	if (key == ESC)
 		exit(0);
 	if (key == KEY_I)
+	{
 		e->s->i++;
+		if (e->s->i > 12)
+			e->s->i = 12;
+	}
 	if (key == KEY_C)
 		handle_color(e);
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)

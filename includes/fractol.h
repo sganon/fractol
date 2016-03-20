@@ -6,14 +6,14 @@
 /*   By: sganon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:34:21 by sganon            #+#    #+#             */
-/*   Updated: 2016/03/19 14:31:34 by sganon           ###   ########.fr       */
+/*   Updated: 2016/03/20 16:04:36 by sganon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "libft.h"
-# include "mlx.h"
+# include "../mlx/mlx.h"
 # include <math.h>
 
 # define ESC			53
